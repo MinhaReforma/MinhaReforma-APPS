@@ -1,2 +1,2 @@
-# Apps
-Repositório dos apps do Minha Reforma
+# Apps - Develop
+Branch criado para desenvolvimento dos aplicativos do Minha Reforma
