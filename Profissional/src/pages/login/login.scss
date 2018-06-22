@@ -1,0 +1,16 @@
+page-login {
+  ion-content {
+    background-color: color($colors, primary, base)!important;
+    div.scroll-content {
+      text-align: center;
+    }
+    #btn-entrar {
+      margin: 1em 0;
+    }
+    div.card-login {
+      padding: 1em!important;
+      background-color: #fff;
+      border-radius: 4px;
+    }
+  }
+}

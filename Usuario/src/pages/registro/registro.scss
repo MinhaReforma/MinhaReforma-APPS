@@ -1,0 +1,23 @@
+page-registro {
+ ion-slide {
+  padding-block-end: 5%;
+  height: auto;
+ }
+  p {
+    font-size: 0.8em;
+    color: #d2d2d2;
+  }
+
+  .swiper-slide {
+    display: block;
+  }
+
+  ion-label,
+  .select-text {
+    margin-left: 10px;
+  }
+
+  .invalid {
+    border: 1px solid #ea6153;
+  }
+}
