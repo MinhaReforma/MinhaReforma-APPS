@@ -52,7 +52,7 @@ export class LoginPage {
           duration: 1500,
           position: 'bottom'
         }).present();
-        this.navCtrl.setRoot('HomePage',{"id":result.id});
+        this.navCtrl.setRoot('MainBottomNavigationPage',{"id":result.id});
       }
     },
     (error) => {
