@@ -35,6 +35,10 @@ export class ReformasNavigationPage {
     this.carregaReformas();
   }
 
+  abrirDetalhes(ref){
+    this.navCtrl.push("ReformaDetalhesPage", {"id": ref.id});
+  }
+
   async carregaReformas(){
     return await new Promise((resolve, reject) => {
       let url = this.API_URL + "reformas";

@@ -20,7 +20,7 @@
 <ion-content padding>
   <div [ngSwitch]="tiposReformas">
     <div *ngSwitchCase="'minhas'">
-      <ion-card *ngFor="let ref of reformas" class="reforma-card">
+      <ion-card *ngFor="let ref of reformas" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
         <h1>{{ref.nome}}</h1>
         <p>{{ref.descricao}}</p>
         <ion-grid>
