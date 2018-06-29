@@ -1,3 +1,11 @@
 page-reforma-detalhes {
-
+  img {
+    width: 100%;
+    height:auto;
+  }
+  span.status {
+    background-color: color($colors, primary, base)!important;
+    color:white;
+    padding: 4px;
+  }
 }

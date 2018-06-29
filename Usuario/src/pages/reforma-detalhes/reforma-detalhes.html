@@ -1,18 +1,21 @@
-<!--
-  Generated template for the ReformaDetalhesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>reforma-detalhes</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>reforma.nome</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <img src="assets/imgs/reforma.jpg">
+  <div padding>
+    <h3>Detalhes</h3>
+    <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> reforma.descricao</p>
+    <p><ion-icon name="person"></ion-icon> <b>Solicitante:</b> reforma.cliente.id</p>
+    <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> reforma.datainicio</p>
+    <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status">NÃO INICIADA</span></p>
+    <!-- <button ion-button block color="primary">Aplicar a reforma</button> -->
+  </div>
 
 </ion-content>

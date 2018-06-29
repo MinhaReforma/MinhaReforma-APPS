@@ -32,9 +32,9 @@ export class ReformaDetalhesPage {
 
   async carregaReformaDetalhe(){
     return await new Promise((resolve, reject) => {
-      let url = this.API_URL + "reformas/id";
+      let url = this.API_URL + "reformas/" + this.id;
 
-      this.httpClient.get(url,this.id).subscribe(
+      this.httpClient.get(url).subscribe(
         (result: any) => {
           if(result){
 
