@@ -1,8 +1,28 @@
 page-registro {
  ion-slide {
-  padding-block-end: 5%;
+  border-bottom: 0;
   height: auto;
+  padding-bottom: 10%;
+  .button{
+    margin-top: 5%;
+  }
  }
+
+ ion-slides.slides {
+  height: auto;
+  padding-bottom: 5%;
+}
+.no-slide{
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.scroll-content {
+  overflow: hidden;
+}
+.swiper-pagination {
+  bottom: 0px;
+}
   p {
     font-size: 0.8em;
     color: #d2d2d2;

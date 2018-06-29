@@ -5,95 +5,129 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar color="primary">
-      <!-- <ion-buttons start>
-        <button ion-button icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> Anterior </button>
-      </ion-buttons> -->
-      <ion-buttons start>
+  <ion-navbar color="primary">
+
+    <ion-buttons start>
       <button ion-button icon-only clear (click)="closeModal()">
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
-      <ion-title>
-        Registrar
-      </ion-title>
-      <!-- <ion-buttons end>
-        <button ion-button icon-right (click)="next()"> Próximo <ion-icon name="arrow-forward"></ion-icon></button>
-      </ion-buttons> -->
-    </ion-navbar>
+    <ion-title>
+      Registrar
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-left (click)="prev()">
+        <ion-icon name="arrow-back"></ion-icon> Anterior </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="next()"> Próximo
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content no-bounce class="no-slide">
 
-    <!-- <ion-slides #registroSlider> -->
+  <ion-slides #registroSlider pager="true" paginationType="progress" spaceBetween="30" ion-fixed>
 
-      <!-- <ion-slide>
-          <p *ngIf="submitAttempt" >Informações Pessoais</p>
+    <ion-slide>
+      <ion-card>
+        <ion-card-content>
+          <ion-card-title style="color:#000000;text-align:center;padding-top:10px; font-size: 24px; font-weight: bold;">
+            Informações Pessoais
+          </ion-card-title>
+          <p *ngIf="submitAttempt">Informações Pessoais</p>
 
-          <ion-list no-lines>
+          <form [formGroup]="slideOneForm">
 
-              <form [formGroup]="slideOneForm">
+            <ion-item>
+              <ion-label stacked>Primeiro Nome</ion-label>
+              <ion-input formControlName="firstName" type="text" [class.invalid]="!slideOneForm.controls.firstName.valid && (slideOneForm.controls.firstName.dirty || submitAttempt)"></ion-input>
+            </ion-item>
 
-                <ion-item>
-                  <ion-label floating>Primeiro Nome</ion-label>
-                  <ion-input formControlName="firstName" type="text" [class.invalid]="!slideOneForm.controls.firstName.valid && (slideOneForm.controls.firstName.dirty || submitAttempt)"></ion-input>
+            <ion-item *ngIf="!slideOneForm.controls.firstName.valid  && (slideOneForm.controls.firstName.dirty || submitAttempt)">
+              <p>Digite um nome válido.</p>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>Último Nome</ion-label>
+              <ion-input formControlName="lastName" type="text" [class.invalid]="!slideOneForm.controls.lastName.valid && (slideOneForm.controls.lastName.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="!slideOneForm.controls.lastName.valid  && (slideOneForm.controls.lastName.dirty || submitAttempt)">
+              <p>Digite um nome válido.</p>
+            </ion-item>
+
+            <ion-item>
+              <ion-label stacked>CPF</ion-label>
+              <ion-input formControlName="cpf" type="tel" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt)"></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="!slideOneForm.controls.cpf.valid  && ( slideOneForm.controls.cpf.dirty || submitAttempt)">
+              <p>Por favor digite um CPF válido.</p>
+            </ion-item>
+
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-card>
+        <ion-card-content>
+          <ion-card-title style="color:#000000;text-align:center;padding-top:10px; font-size: 24px; font-weight: bold;">
+            Informações Profissionais
+          </ion-card-title>
+
+          <div>
+            <ion-item>
+              <ion-label stacked>Habilidades</ion-label>
+              <ion-input [(ngModel)]="habilidade" type="text" placeholder=""></ion-input>
+              <button item-end ion-button icon-only clear (click)="addHabilidade()"><ion-icon name="add-circle"></ion-icon></button>
+            </ion-item>
+            <ion-list>
+              <ion-item *ngFor="let hab of habilidades" >
+                {{hab}}
+                <button item-end ion-button icon-only clear (click)="removeHabilidade(hab)"><ion-icon name="close"></ion-icon></button>
               </ion-item>
-
-              <ion-item *ngIf="!slideOneForm.controls.firstName.valid  && (slideOneForm.controls.firstName.dirty || submitAttempt)">
-                  <p>Digite um nome válido.</p>
-              </ion-item>
-
-              <ion-item>
-                  <ion-label floating>Último Nome</ion-label>
-                  <ion-input formControlName="lastName" type="text" [class.invalid]="!slideOneForm.controls.lastName.valid && (slideOneForm.controls.lastName.dirty || submitAttempt)"></ion-input>
-              </ion-item>
-
-              <ion-item *ngIf="!slideOneForm.controls.lastName.valid  && (slideOneForm.controls.lastName.dirty || submitAttempt)">
-                  <p>Digite um nome válido.</p>
-              </ion-item>
-
-              <ion-item>
-                  <ion-label floating>CPF</ion-label>
-                  <ion-input formControlName="cpf" type="number" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt)"></ion-input>
-              </ion-item>
-
-              <ion-item *ngIf="!slideOneForm.controls.cpf.valid  && (slideOneForm.controls.cpf.dirty || submitAttempt)">
-                  <p>Por favor digite um CPF válido.</p>
-              </ion-item>
-
-              </form>
-
-          </ion-list>
-      </ion-slide> -->
-
-      <!-- <ion-slide> -->
+            </ion-list>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-card-content>
+          <ion-card-title style="color:#000000;text-align:center;padding-top:10px; font-size: 24px; font-weight: bold;">
+            Informações de Login
+          </ion-card-title>
           <br />
-          <ion-list no-lines>
+          <form [formGroup]="slideTwoForm">
 
-              <form [formGroup]="slideTwoForm">
+            <ion-item>
+              <ion-label stacked>Telefone</ion-label>
+              <ion-input formControlName="telefone" type="tel" mask="(**)*****-****"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!slideTwoForm.controls.telefone.valid  && ( slideTwoForm.controls.telefone.dirty || submitAttempt)">
+              <p>Por favor digite um telefone válido.</p>
+            </ion-item>
 
-                  <ion-item>
-                      <ion-label floating>Telefone</ion-label>
-                      <ion-input formControlName="telefone" type="tel" mask="(**)*****-****"></ion-input>
-                  </ion-item>
-
-                  <ion-item>
-                      <ion-label floating>Senha</ion-label>
-                      <ion-input formControlName="senha" type="password"></ion-input>
-                  </ion-item>
-
-                  <!-- <ion-item>
-                      <ion-label floating>Senha</ion-label>
-                      <ion-input formControlName="senha2" type="password"></ion-input>
-                  </ion-item> -->
-
-              </form>
-
-          </ion-list>
-
+            <ion-item>
+              <ion-label stacked>Senha</ion-label>
+              <ion-input formControlName="senha" type="password"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="!slideTwoForm.controls.senha.valid  && ( slideTwoForm.controls.senha.dirty || submitAttempt)">
+              <p>A senha deve conter pelo menos 4 dígitos.</p>
+            </ion-item>
+          </form>
           <button ion-button full color="primary" (click)="save()">Create Account!</button>
-      <!-- </ion-slide>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
 
-    </ion-slides> -->
+  </ion-slides>
 
 </ion-content>
