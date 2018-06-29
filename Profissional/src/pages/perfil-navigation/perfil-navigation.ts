@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+
 /**
  * Generated class for the PerfilNavigationPage page.
  *
@@ -29,34 +30,32 @@ export class PerfilNavigationPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilNavigationPage');
   }
+
   ionViewWillLoad(){
     this.carregarUsuario();
   }
 
   async carregarUsuario(){
-      return await new Promise((resolve, reject) => {
-        let url = this.API_URL + "clientes/id";
+    return await new Promise((resolve, reject) => {
+      let url = this.API_URL + "profissionais/id";
 
-        this.httpClient.get(url,this.id).subscribe(
-          (result: any) => {
-            if(result){
-              this.ngZone.run(()=>{
-                this.perfil = result;
-                this.perfilLoading = false;
-              });
+      this.httpClient.get(url,this.id).subscribe(
+        (result: any) => {
+          if(result){
+            this.ngZone.run(()=>{
+              console.log(result);
+              this.perfil = result;
+              this.perfilLoading = false;
+            });
 
 
-            }
-            //resolve(result.json());
-          },
-          error => {
-            //reject(error.json());
           }
-        );
-      });
-    }
-
-
-
-
+          //resolve(result.json());
+        },
+        error => {
+          //reject(error.json());
+        }
+      );
+    });
+  }
 }

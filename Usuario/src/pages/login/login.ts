@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -22,7 +23,7 @@ export class LoginPage {
   passwordIcon: string = 'eye-off';
   user: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public modalCtrl: ModalController, private httpClient: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public modalCtrl: ModalController, private httpClient: HttpClient, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -44,8 +45,8 @@ export class LoginPage {
             duration: 2000,
             position: 'bottom'
           }).present();
+          this.storage.set('usuario',result.id);
           this.navCtrl.setRoot('MainBottomNavigationPage');
-          window.localStorage['usuarioId'] = result.id;
         }
       },
       (error) => {

@@ -28,6 +28,7 @@ export class ReformaDetalhesPage {
     console.log('ionViewDidLoad ReformaDetalhesPage');
   }
   ionViewWillLoad(){
+    console.log(this.reformaLoading);
     this.carregaReformaDetalhe();
   }
 
@@ -39,6 +40,7 @@ export class ReformaDetalhesPage {
         (result: any) => {
           if(result){
             this.ngZone.run(()=>{
+              console.log(result);
               this.reforma = result;
               this.reformaLoading = false;
             });
@@ -54,6 +56,8 @@ export class ReformaDetalhesPage {
     });
   }
 
+  registrarInteresse(){
 
+  }
 
 }

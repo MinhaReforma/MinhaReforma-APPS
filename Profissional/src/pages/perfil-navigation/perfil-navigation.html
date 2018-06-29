@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <div *ngIf="!perfilLoading" class="profile-header">
+  <div *ngIf="!perfilLoading"  class="profile-header" >
     <img src="assets/imgs/me.jpg">
     <h2>{{perfil.nome}}</h2>
     <div class="links">
@@ -37,5 +37,7 @@
     <p>{{perfil.cpf}}</p>
     <h4>Telefone</h4>
     <p>{{perfil.telefone}}</p>
+    <h4>Habilidades</h4>
+    <p>{{perfil.habilidades}}</p>
   </div>
 </ion-content>

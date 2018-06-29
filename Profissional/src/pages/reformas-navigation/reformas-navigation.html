@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Minhas reformas</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-padding>
+    <ion-segment [(ngModel)]="tiposReformas">
+      <ion-segment-button value="minhas">
+        Minhas
+      </ion-segment-button>
+      <ion-segment-button value="execucao">
+        Em execução
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="tiposReformas">
+    <div *ngSwitchCase="'minhas'">
+      <ion-card *ngFor="let ref of reformas" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
+        <h1>{{ref.nome}}</h1>
+        <p>{{ref.descricao}}</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6><ion-icon name="calendar"></ion-icon> {{ ref.datainicio }}</ion-col>
+            <ion-col col-6>Profissionais: <ion-badge item-end>0</ion-badge></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+
+    </div>
+
+    <div *ngSwitchCase="'execucao'" id="development">
+      Em desenvolvimento<br><ion-icon name="code-working"></ion-icon>
+    </div>
+
+  </div>
+
+</ion-content>

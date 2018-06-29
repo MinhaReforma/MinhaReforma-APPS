@@ -18,6 +18,8 @@ export class RegistroPage {
   slideTwoForm: FormGroup;
   habilidade: string = "";
   habilidades: string[] = [];
+  isFirst: boolean = true;
+  isLast: boolean = false;
 
   submitAttempt: boolean = false;
   API_URL: string = "https://minhareforma.herokuapp.com/";
@@ -63,12 +65,24 @@ export class RegistroPage {
     });
   }
 
+  ionViewDidLoad(){
+    this.registroSlider.lockSwipes(true);
+  }
+
   next() {
     this.registroSlider.slideNext();
+    this.isFirst = false;
+    if(this.registroSlider.isEnd()){
+      this.isLast = true;
+    }
   }
 
   prev() {
     this.registroSlider.slidePrev();
+    this.isLast = false;
+    if(this.registroSlider.isBeginning()){
+      this.isFirst = true;
+    }
   }
 
   addHabilidade(){

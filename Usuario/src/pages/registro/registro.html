@@ -18,10 +18,10 @@
   </ion-navbar>
   <ion-toolbar color="primary">
       <ion-buttons left>
-          <button ion-button icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> Anterior </button>
+          <button [disabled]="isFirst" ion-button icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> Anterior </button>
         </ion-buttons>
       <ion-buttons end>
-          <button ion-button icon-right (click)="next()"> Próximo <ion-icon name="arrow-forward"></ion-icon></button>
+          <button [disabled]="isLast" ion-button icon-right (click)="next()"> Próximo <ion-icon name="arrow-forward"></ion-icon></button>
         </ion-buttons>
   </ion-toolbar>
 </ion-header>

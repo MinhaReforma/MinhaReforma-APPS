@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title *ngIf="!reformaLoading">{{reforma.nome}}</ion-title>
+    <ion-title *ngIf="!reformaLoading" >{{reforma.nome}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,10 +12,14 @@
   <div padding *ngIf="!reformaLoading">
     <h3>Detalhes</h3>
     <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> {{reforma.descricao}}</p>
-    <p><ion-icon name="person"></ion-icon> <b>Solicitante:</b> {{reforma.cliente.id}}</p>
+    <p><ion-icon name="person"></ion-icon> <b>Solicitante:</b> {{reforma.id_cliente}}</p>
     <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{reforma.datainicio}}</p>
     <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status">NÃO INICIADA</span></p>
     <!-- <button ion-button block color="primary">Aplicar a reforma</button> -->
   </div>
 
 </ion-content>
+
+<ion-footer>
+  <button ion-button full (click)="registrarInteresse()"> Demonstrar Interesse </button>
+</ion-footer>

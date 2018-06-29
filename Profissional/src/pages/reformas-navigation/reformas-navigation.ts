@@ -1,35 +1,32 @@
+import { Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
-import { Reforma } from '../../model/reforma.model';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-reformas-navigation',
+  templateUrl: 'reformas-navigation.html',
 })
-export class HomePage {
+export class ReformasNavigationPage {
+
+  tiposReformas:string;
   id: number;
   reformas:any = [];
   API_URL: string = "https://minhareforma.herokuapp.com/";
-  constructor(public navCtrl: NavController, public navParam: NavParams, public modalCtrl: ModalController, public httpClient: HttpClient) {
 
-    this.id = navParam.get("id");
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public httpClient: HttpClient) {
+    this.tiposReformas = 'minhas';
+    this.id = navParams.get("id");
     console.log(this.id);
-  }
-
-  criarReforma(){
-    let modal = this.modalCtrl.create('CriaReformaPage', {"id":this.id});
-    modal.onDidDismiss(data => {
-      this.carregaReformas();
-    });
-    modal.present();
-
 
   }
 
   ionViewDidLoad(){
     this.carregaReformas();
+  }
+
+  abrirDetalhes(ref){
+    this.navCtrl.push("ReformaDetalhesPage", {"id": ref.id});
   }
 
   async carregaReformas(){
@@ -39,9 +36,9 @@ export class HomePage {
       this.httpClient.get(url).subscribe(
         (result: any) => {
           if(result){
-            for(let i in result){
-              this.reformas.push(result[i]);
-            }
+
+              this.reformas = result;
+
 
 
           }

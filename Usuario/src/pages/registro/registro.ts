@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Component, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { IonicPage, NavController, ToastController } from "ionic-angular";
-import { Usuario } from "../../model/usuario.model";
 
 
 @IonicPage()
@@ -15,6 +14,8 @@ export class RegistroPage {
 
   slideOneForm: FormGroup;
   slideTwoForm: FormGroup;
+  isFirst: boolean = true;
+  isLast: boolean = false;
 
   submitAttempt: boolean = false;
   API_URL: string = "https://minhareforma.herokuapp.com/";
@@ -60,12 +61,25 @@ export class RegistroPage {
     });
   }
 
+  ionViewDidLoad(){
+    this.registroSlider.lockSwipes(true);
+  }
+
   next() {
     this.registroSlider.slideNext();
+    console.log(this.registroSlider.getActiveIndex())
+    this.isFirst = false;
+    if(this.registroSlider.isEnd()){
+      this.isLast = true;
+    }
   }
 
   prev() {
     this.registroSlider.slidePrev();
+    this.isLast = false;
+    if(this.registroSlider.isBeginning()){
+      this.isFirst = true;
+    }
   }
 
   async save() {
