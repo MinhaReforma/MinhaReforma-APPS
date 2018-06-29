@@ -1,3 +1,27 @@
 page-perfil-navigation {
+  .profile-header {
+    background-color: color($colors, primary, base)!important;
+    padding-top: 16px;
+    color: #fff;
+    text-align: center;
+    img {
+      width: 10em;
+      height: 10em;
+      border-radius: 100%;
+      border:3px solid #fff;
+    }
+  }
+  .links {
+    border-top: 1px solid rgba(255,255,255,0.3);
+    ion-col + ion-col {
+      border-left: 1px solid rgba(255,255,255,0.3);
+    }
+    h6 {
+      margin-top: 0.6em;
+    }
+  }
+  .profile-body {
+    padding: 16px;
+  }
 
 }
