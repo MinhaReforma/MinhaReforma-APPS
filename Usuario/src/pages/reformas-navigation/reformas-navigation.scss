@@ -1,8 +1,11 @@
 page-reformas-navigation {
-  div.reforma-card {
+  ion-content {
+    background-color: color($colors, light, base)!important;
+  }
+  .reforma-card {
     padding: 0.8em;
-    background-color: antiquewhite;
-    border-radius: 10px;
+    background-color: white;
+    border-radius: 4px;
     p{
       margin-bottom: 5px;
     }
