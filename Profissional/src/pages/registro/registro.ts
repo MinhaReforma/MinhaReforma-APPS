@@ -1,3 +1,4 @@
+import { Habilidade } from './../../model/enum/habilidade.enum';
 import { HttpClient } from "@angular/common/http";
 import { Component, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -15,6 +16,8 @@ export class RegistroPage {
 
   slideOneForm: FormGroup;
   slideTwoForm: FormGroup;
+  habilidade: string = "";
+  habilidades: string[] = [];
 
   submitAttempt: boolean = false;
   API_URL: string = "https://minhareforma.herokuapp.com/";
@@ -68,15 +71,37 @@ export class RegistroPage {
     this.registroSlider.slidePrev();
   }
 
-  async save() {
-    let user: Usuario = new Usuario(
-      this.slideTwoForm.value.telefone,
-      this.slideTwoForm.value.senha
-    );
-    return await new Promise((resolve, reject) => {
-      let url = this.API_URL + "usuarios";
+  addHabilidade(){
 
-      this.httpClient.post(url, user).subscribe(
+    let index = this.habilidades.indexOf(this.habilidade);
+    if(index < 0 && this.habilidade.trim() != ""){
+      this.habilidades.push(this.habilidade);
+    }
+    this.habilidade = "";
+
+  }
+
+  removeHabilidade(habilidade){
+    let index = this.habilidades.indexOf(habilidade);
+
+    if(index > -1){
+      this.habilidades.splice(index, 1);
+    }
+  }
+
+  async save() {
+    if (this.slideOneForm.invalid){
+      this.registroSlider.slideTo(0,500);
+      return
+    } else if (this.slideTwoForm.invalid){
+      return;
+    }
+    var usuario = {"telefone": this.slideTwoForm.value.telefone, "senha": this.slideTwoForm.value.senha,
+     "cpf": this.slideOneForm.value.cpf, "nome": this.slideOneForm.value.firstName +" "+this.slideOneForm.value.lastName, "habilidades": this.habilidades };
+    return await new Promise((resolve, reject) => {
+      let url = this.API_URL + "profissionais";
+
+      this.httpClient.post(url, usuario).subscribe(
         (result: any) => {
           console.log(result);
           console.log(result.sucesso);
@@ -100,18 +125,4 @@ export class RegistroPage {
   closeModal() {
     this.navCtrl.pop();
   }
-  // console.log("teste");
-  // this.submitAttempt = true;
-
-  // if(!this.slideOneForm.valid){
-  //     this.registroSlider.slideTo(0);
-  // }
-  // else if(!this.slideTwoForm.valid){
-  //     this.registroSlider.slideTo(1);
-  // }
-  // else {
-  //     console.log("success!")
-  //     console.log(this.slideOneForm.value);
-  //     console.log(this.slideTwoForm.value);
-  // }
 }

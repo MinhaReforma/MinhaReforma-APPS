@@ -42,9 +42,9 @@ export class ReformasNavigationPage {
       this.httpClient.get(url).subscribe(
         (result: any) => {
           if(result){
-            for(let i in result){
-              this.reformas.push(result[i]);
-            }
+
+              this.reformas = result;
+
 
 
           }

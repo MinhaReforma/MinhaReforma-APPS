@@ -69,14 +69,18 @@ export class RegistroPage {
   }
 
   async save() {
-    let user: Usuario = new Usuario(
-      this.slideTwoForm.value.telefone,
-      this.slideTwoForm.value.senha
-    );
+    if (this.slideOneForm.invalid){
+      this.prev();
+      return
+    } else if (this.slideTwoForm.invalid){
+      return;
+    }
+    var usuario = {"telefone": this.slideTwoForm.value.telefone, "senha": this.slideTwoForm.value.senha,
+     "cpf": this.slideOneForm.value.cpf, "nome": this.slideOneForm.value.firstName +" "+this.slideOneForm.value.lastName };
     return await new Promise((resolve, reject) => {
-      let url = this.API_URL + "usuarios";
+      let url = this.API_URL + "clientes";
 
-      this.httpClient.post(url, user).subscribe(
+      this.httpClient.post(url, usuario).subscribe(
         (result: any) => {
           console.log(result);
           console.log(result.sucesso);
@@ -100,18 +104,4 @@ export class RegistroPage {
   closeModal() {
     this.navCtrl.pop();
   }
-  // console.log("teste");
-  // this.submitAttempt = true;
-
-  // if(!this.slideOneForm.valid){
-  //     this.registroSlider.slideTo(0);
-  // }
-  // else if(!this.slideTwoForm.valid){
-  //     this.registroSlider.slideTo(1);
-  // }
-  // else {
-  //     console.log("success!")
-  //     console.log(this.slideOneForm.value);
-  //     console.log(this.slideTwoForm.value);
-  // }
 }
