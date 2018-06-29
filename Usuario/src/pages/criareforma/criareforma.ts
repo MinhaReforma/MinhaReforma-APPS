@@ -13,8 +13,7 @@ export class CriaReformaPage{
   input = {nome: "", descricao: "" };
   id: number;
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public toastCtrl: ToastController) {
-    this.id = navParams.get("id");
-    console.log(this.id);
+    this.id = parseInt(window.localStorage.usuarioId);
   }
 
   ionViewDidLoad() {

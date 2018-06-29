@@ -30,42 +30,29 @@ export class LoginPage {
   }
 
   login(){
-      return new Promise((resolve, reject) => {
-        var data = {
-          telefone: this.usuario.telefone,
-          senha: this.usuario.senha
-        };
-        let url = this.API_URL + 'usuarios/login';
-    this.httpClient.post(url, data).subscribe((result: any) => {
-      //resolve(result.json());
-      console.log(result);
-      if(result){
-        this.toastCtrl.create({
-          message: 'resultado',
-          duration: 1000,
-          position: 'bottom'
-        }).present();
-      }
-      if(result.sucesso == true){
-        this.toastCtrl.create({
-          message: 'Logado com Sucesso',
-          duration: 1500,
-          position: 'bottom'
-        }).present();
-        this.navCtrl.setRoot('MainBottomNavigationPage',{"id":result.id});
-      }
-    },
-    (error) => {
-      //reject(error.json());
+    return new Promise((resolve, reject) => {
+      var data = {
+        telefone: this.usuario.telefone,
+        senha: this.usuario.senha
+      };
+      let url = this.API_URL + 'usuarios/login';
+      this.httpClient.post(url, data).subscribe((result: any) => {
+        //resolve(result.json());
+        if(result.sucesso == true){
+          this.toastCtrl.create({
+            message: 'Logado com sucesso',
+            duration: 2000,
+            position: 'bottom'
+          }).present();
+          this.navCtrl.setRoot('MainBottomNavigationPage');
+          window.localStorage['usuarioId'] = result.id;
+        }
+      },
+      (error) => {
+        //reject(error.json());
+      });
     });
-  });
 }
-    // if(this.usuario.telefone == "123" && this.usuario.senha == "123"){
-    //   this.navCtrl.setRoot('HomePage', { 'telefone':this.usuario.telefone});
-    // }else{
-
-    // }
-
 
  showHide() {
      this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
