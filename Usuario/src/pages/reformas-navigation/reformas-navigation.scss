@@ -1,3 +1,20 @@
 page-reformas-navigation {
-
+  div.reforma-card {
+    padding: 0.8em;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    p{
+      margin-bottom: 5px;
+    }
+  }
+  div#development {
+    width: 90%;
+    position: absolute;
+    top: 44%;
+    text-align: center;
+    font-size: 1.5em;
+    ion-icon {
+      font-size: 2.5em;
+    }
+  }
 }

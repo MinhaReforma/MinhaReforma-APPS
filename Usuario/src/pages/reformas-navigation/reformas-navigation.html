@@ -12,9 +12,6 @@
       <ion-segment-button value="execucao">
         Em execução
       </ion-segment-button>
-      <ion-segment-button value="finalizadas">
-        Finalizadas
-      </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -22,32 +19,28 @@
 
 <ion-content padding>
   <div [ngSwitch]="tiposReformas">
-    <ion-list *ngSwitchCase="'minhas'">
-      <ion-item>
-        <!-- <ion-thumbnail item-start>
-            <img src="img/thumbnail-puppy-1.jpg">
-          </ion-thumbnail> -->
-        <h2>minhas</h2>
-      </ion-item>
-    </ion-list>
+    <div *ngSwitchCase="'minhas'">
+      <ion-list>
+        <ion-item *ngFor="let ref of reformas" >
+          <div class="reforma-card">
+            <h1>{{ref.nome}}</h1>
+            <p><b>Descrição</b></p>
+            <p>{{ref.descricao}}</p>
+          </div>
+        </ion-item>
+      </ion-list>
 
-    <ion-list *ngSwitchCase="'execucao'">
-      <ion-item>
-        <!-- <ion-thumbnail item-start>
-            <img src="img/thumbnail-kitten-1.jpg">
-          </ion-thumbnail> -->
-        <h2>execucao</h2>
-      </ion-item>
-    </ion-list>
+      <ion-fab right bottom>
+        <button ion-fab (click)="criarReforma()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
 
-    <ion-list *ngSwitchCase="'finalizadas'">
-      <ion-item>
-        <!-- <ion-thumbnail item-start>
-            <img src="img/thumbnail-kitten-1.jpg">
-          </ion-thumbnail> -->
-        <h2>finalizadas</h2>
-      </ion-item>
-    </ion-list>
+    <div *ngSwitchCase="'execucao'" id="development">
+      Em desenvolvimento<br><ion-icon name="code-working"></ion-icon>
+    </div>
+
   </div>
 
 </ion-content>
