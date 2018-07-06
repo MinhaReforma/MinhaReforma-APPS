@@ -1,4 +1,8 @@
 page-reformas-navigation {
+  .toolbar-md.tabs {
+    min-height: 42px;
+    margin-top: 14px;
+  }
   ion-content {
     background-color: color($colors, light, base)!important;
   }
