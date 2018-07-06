@@ -22,24 +22,17 @@ export class PerfilNavigationPage {
   id: any;
   perfilLoading: boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient:HttpClient, private ngZone:NgZone, private storage: Storage) {
-    storage.get('age').then((val)=>{
+    storage.get('profissional').then((val)=>{
       this.id = val;
+      this.carregarUsuario();
     })
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PerfilNavigationPage');
-  }
-
-  ionViewWillLoad(){
-    this.carregarUsuario();
   }
 
   async carregarUsuario(){
     return await new Promise((resolve, reject) => {
-      let url = this.API_URL + "profissionais/id";
+      let url = this.API_URL + "profissionais/"+ this.id;
 
-      this.httpClient.get(url,this.id).subscribe(
+      this.httpClient.get(url).subscribe(
         (result: any) => {
           if(result){
             this.ngZone.run(()=>{
