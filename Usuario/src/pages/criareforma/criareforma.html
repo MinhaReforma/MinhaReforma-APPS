@@ -19,14 +19,22 @@
 
 
 <ion-content padding>
+    <form [formGroup]="formgroup">
   <ion-item>
     <ion-label stacked>Nome</ion-label>
-    <ion-input [(ngModel)]="input.nome" ></ion-input>
+    <ion-input formControlName="nome" ></ion-input>
   </ion-item>
+  <ion-item *ngIf="!formgroup.controls.nome.valid  && ( formgroup.controls.nome.dirty || submitAttempt)">
+      <p>Por favor digite um nome válido.</p>
+    </ion-item>
   <ion-item>
     <ion-label stacked>Descrição</ion-label>
-    <ion-textarea [(ngModel)]="input.descricao" placeholder="Descreva o que será feito na reforma. Uma descrição bem feita permitirá achar os melhores profissionais mais facilmente"></ion-textarea>
+    <ion-textarea formControlName="descricao" placeholder="Descreva o que será feito na reforma. Uma descrição bem feita permitirá achar os melhores profissionais mais facilmente"></ion-textarea>
   </ion-item>
+  <ion-item *ngIf="!formgroup.controls.descricao.valid  && ( formgroup.controls.descricao.dirty || submitAttempt)">
+      <p>A descrição deve conter pelo menos 10 caracteres.</p>
+    </ion-item>
+    </form>
 
   <button ion-button full (click)="criarReforma()" class="button-create">Criar Reforma</button>
 

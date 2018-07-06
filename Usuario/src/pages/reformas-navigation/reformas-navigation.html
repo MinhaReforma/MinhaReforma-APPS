@@ -20,7 +20,7 @@
 <ion-content padding>
   <div [ngSwitch]="tiposReformas">
     <div *ngSwitchCase="'minhas'">
-      <div *ngIf="showNone == true" id="development">
+      <div *ngIf="showNone" id="development">
         Nenhuma reforma cadastrada<br><ion-icon>:(</ion-icon>
       </div>
       <ion-card *ngFor="let ref of reformas" class="reforma-card" tappable (click)="abrirDetalhes(ref)">

@@ -53,10 +53,10 @@ export class ReformaDetalhesPage {
 
 
           }
-          resolve(result.json());
+          // resolve(result.json());
         },
         error => {
-          reject(error.json());
+          // reject(error.json());
         }
       );
     });
@@ -64,7 +64,7 @@ export class ReformaDetalhesPage {
 
   async registrarInteresse(){
     return await new Promise((resolve, reject) => {
-      let url = this.API_URL + "reformas/aplicar" + this.id;
+      let url = this.API_URL + "reformas/profissionais";
       let dados = {
         'id_reforma':this.reforma.id,  'id_profissional':this.profissional
       }

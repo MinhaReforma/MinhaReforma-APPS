@@ -34,7 +34,7 @@ export class ReformasNavigationPage {
         (result: any) => {
           if(result.sucesso){
             this.showNone = false;
-              this.reformas = result;
+              this.reformas = result.reformas;
           }
         },
         error => {}
