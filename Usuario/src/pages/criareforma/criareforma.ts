@@ -2,6 +2,8 @@ import { Reforma } from './../../model/reforma.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
+
 
 @IonicPage()
 @Component({
@@ -12,12 +14,10 @@ export class CriaReformaPage{
   API_URL: string = "https://minhareforma.herokuapp.com/";
   input = {nome: "", descricao: "" };
   id: number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public toastCtrl: ToastController) {
-    this.id = parseInt(window.localStorage.usuarioId);
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CriareformaPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public toastCtrl: ToastController, public storage: Storage) {
+    this.storage.get('cliente').then((val)=>{
+      this.id = val;
+    });
   }
 
   closeModal(){

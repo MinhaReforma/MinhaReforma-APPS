@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
       <ion-buttons start>
           <button ion-button icon-only clear (click)="closeModal()">
             <ion-icon name="close"></ion-icon>
@@ -25,9 +25,9 @@
   </ion-item>
   <ion-item>
     <ion-label stacked>Descrição</ion-label>
-    <ion-textarea [(ngModel)]="input.descricao"></ion-textarea>
+    <ion-textarea [(ngModel)]="input.descricao" placeholder="Descreva o que será feito na reforma. Uma descrição bem feita permitirá achar os melhores profissionais mais facilmente"></ion-textarea>
   </ion-item>
 
-  <button ion-button full (click)="criarReforma()">Criar Reforma</button>
+  <button ion-button full (click)="criarReforma()" class="button-create">Criar Reforma</button>
 
 </ion-content>
