@@ -62,7 +62,7 @@ export class RegistroPage {
   }
 
   ionViewDidLoad(){
-    this.registroSlider.lockSwipes(true);
+    // this.registroSlider.lockSwipes(true);
   }
 
   next() {
@@ -94,22 +94,23 @@ export class RegistroPage {
     return await new Promise((resolve, reject) => {
       let url = this.API_URL + "clientes";
 
-      this.httpClient.post(url, usuario).subscribe(
+      this.httpClient.post(url, usuario).toPromise()
+      .then(
         (result: any) => {
           console.log(result);
-          console.log(result.sucesso);
-          if(result.sucesso == true){
             this.toastCtrl.create({
-              message: 'User was added successfully',
+              message: result.mensagem,
               duration: 1500,
               position: 'bottom'
             }).present();
             this.navCtrl.pop();
-          }
-          //resolve(result.json());
         },
         error => {
-          //reject(error.json());
+          this.toastCtrl.create({
+            message: error.error.mensagem,
+            duration: 1500,
+            position: 'bottom'
+          }).present();
         }
       );
     });

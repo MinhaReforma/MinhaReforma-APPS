@@ -23,6 +23,7 @@ export class LoginPage {
   user: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public modalCtrl: ModalController, public httpClient: HttpClient, private storage: Storage) {
+
   }
 
   ionViewDidLoad() {
@@ -30,36 +31,36 @@ export class LoginPage {
   }
 
   async login(){
-      return await new Promise((resolve, reject) => {
-        var data = {
-          telefone: this.usuario.telefone,
-          senha: this.usuario.senha
-        };
-        let url = this.API_URL + 'usuarios/login';
-    this.httpClient.post(url, data).subscribe((result: any) => {
-      //resolve(result.json());
-      console.log(result);
-      if(result){
+    return new Promise((resolve, reject) => {
+      var data = {
+        telefone: this.usuario.telefone,
+        senha: this.usuario.senha,
+        tipoPessoa: 'profissional'
+      };
+      let url = this.API_URL + 'login';
+      this.httpClient.post(url, data).toPromise()
+      .then(
+        (result: any) => {
+          console.log(result);
         this.toastCtrl.create({
-          message: 'resultado',
-          duration: 1000,
+          message: 'Logado com sucesso',
+          duration: 2000,
           position: 'bottom'
         }).present();
-      }
-      if(result.sucesso == true){
-        this.toastCtrl.create({
-          message: 'Logado com Sucesso',
-          duration: 1500,
-          position: 'bottom'
-        }).present();
-        this.storage.set('usuario',result.id);
+        this.storage.set('usuario',result.id_usuario);
+        this.storage.set('pessoa',result.id_pessoa);
+        this.storage.set('profissional',result.id_perfil);
         this.navCtrl.setRoot('MainBottomNavigationPage');
-      }
-    },
-    (error) => {
-      //reject(error.json());
+      },
+      (error) => {
+        console.log(error);
+        this.toastCtrl.create({
+          message: error.error.tipo,
+          duration: 2000,
+          position: 'bottom'
+        }).present();
+      });
     });
-  });
 }
     // if(this.usuario.telefone == "123" && this.usuario.senha == "123"){
     //   this.navCtrl.setRoot('HomePage', { 'telefone':this.usuario.telefone});

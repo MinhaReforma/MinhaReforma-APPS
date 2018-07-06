@@ -1,5 +1,6 @@
+import { Storage } from '@ionic/storage';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
 /**
@@ -19,9 +20,13 @@ export class ReformaDetalhesPage {
   API_URL: string = "https://minhareforma.herokuapp.com/";
   reforma:any;
   id:any;
+  profissional:any;
   reformaLoading: boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public ngZone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public ngZone: NgZone, storage: Storage,public toastCtrl: ToastController) {
     this.id = navParams.get("id");
+    storage.get('profissional').then((val)=>{
+      this.profissional = val;
+    })
   }
 
   ionViewDidLoad() {
@@ -36,7 +41,8 @@ export class ReformaDetalhesPage {
     return await new Promise((resolve, reject) => {
       let url = this.API_URL + "reformas/" + this.id;
 
-      this.httpClient.get(url).subscribe(
+      this.httpClient.get(url).toPromise()
+      .then(
         (result: any) => {
           if(result){
             this.ngZone.run(()=>{
@@ -47,17 +53,37 @@ export class ReformaDetalhesPage {
 
 
           }
-          //resolve(result.json());
+          resolve(result.json());
         },
         error => {
-          //reject(error.json());
+          reject(error.json());
         }
       );
     });
   }
 
-  registrarInteresse(){
+  async registrarInteresse(){
+    return await new Promise((resolve, reject) => {
+      let url = this.API_URL + "reformas/aplicar" + this.id;
+      let dados = {
+        'id_reforma':this.reforma.id,  'id_profissional':this.profissional
+      }
+  this.httpClient.post(url,dados).toPromise()
+  .then(
+    (result: any) => {
+      if(result){
+        this.toastCtrl.create({
+          message: 'Solicitação enviada com sucesso!',
+          duration: 2000,
+          position: 'bottom'
+        }).present();
+      }
 
-  }
+    },
+    error => {
 
+    }
+  );
+});
+}
 }

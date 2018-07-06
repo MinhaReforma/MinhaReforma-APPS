@@ -21,7 +21,7 @@ export class PerfilNavigationPage {
   id: any;
   perfilLoading: boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient:HttpClient, private ngZone:NgZone, private storage: Storage) {
-    storage.get('age').then((val)=>{
+    this.storage.get('usuario').then((val)=>{
       this.id = val;
     })
   }

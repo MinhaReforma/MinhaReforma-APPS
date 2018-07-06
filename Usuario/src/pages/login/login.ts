@@ -34,23 +34,25 @@ export class LoginPage {
     return new Promise((resolve, reject) => {
       var data = {
         telefone: this.usuario.telefone,
-        senha: this.usuario.senha
+        senha: this.usuario.senha,
+        tipoPessoa: 'cliente'
       };
-      let url = this.API_URL + 'usuarios/login';
-      this.httpClient.post(url, data).subscribe((result: any) => {
-        //resolve(result.json());
-        if(result.sucesso == true){
-          this.toastCtrl.create({
-            message: 'Logado com sucesso',
-            duration: 2000,
-            position: 'bottom'
-          }).present();
-          this.storage.set('usuario',result.id);
-          this.navCtrl.setRoot('MainBottomNavigationPage');
-        }
+      let url = this.API_URL + 'login';
+      this.httpClient.post(url, data).toPromise()
+      .then(
+        (result: any) => {
+        this.storage.set('usuario',result.id_usuario);
+        this.storage.set('pessoa',result.id_pessoa);
+        this.storage.set('cliente',result.id_perfil);
+        this.navCtrl.setRoot('MainBottomNavigationPage');
       },
       (error) => {
-        //reject(error.json());
+        console.log(error);
+        this.toastCtrl.create({
+          message: error.error.mensagem,
+          duration: 2000,
+          position: 'bottom'
+        }).present();
       });
     });
 }
