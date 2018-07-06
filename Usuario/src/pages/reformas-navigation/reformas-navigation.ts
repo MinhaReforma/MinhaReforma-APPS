@@ -8,7 +8,7 @@ import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angu
   templateUrl: 'reformas-navigation.html',
 })
 export class ReformasNavigationPage {
-
+  showNone: boolean = true;
   tiposReformas:string;
   id: number;
   reformas:any = [];
@@ -16,9 +16,6 @@ export class ReformasNavigationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public httpClient: HttpClient) {
     this.tiposReformas = 'minhas';
-    this.id = navParams.get("id");
-    console.log(this.id);
-
   }
 
   criarReforma(){
@@ -45,18 +42,12 @@ export class ReformasNavigationPage {
 
       this.httpClient.get(url).subscribe(
         (result: any) => {
-          if(result){
-
+          if(result.sucesso){
+            this.showNone = false;
               this.reformas = result;
-
-
-
           }
-          //resolve(result.json());
         },
-        error => {
-          //reject(error.json());
-        }
+        error => {}
       );
     });
   }
