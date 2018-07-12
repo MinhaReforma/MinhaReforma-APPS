@@ -2,6 +2,7 @@ import { Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import Utils from '../../shared/utils'
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -14,8 +15,13 @@ export class ReformasNavigationPage {
   id: number;
   reformas:any = [];
   API_URL: string = "https://minhareforma.herokuapp.com/";
+  idCliente: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public httpClient: HttpClient) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public httpClient: HttpClient, private storage: Storage) {
+    this.storage.get('cliente').then((val)=>{
+      this.idCliente = val;
+      this.carregaReformas();
+    })
     this.tiposReformas = 'minhas';
   }
 
@@ -29,17 +35,13 @@ export class ReformasNavigationPage {
 
   }
 
-  ionViewDidLoad(){
-    this.carregaReformas();
-  }
-
   abrirDetalhes(ref){
     this.navCtrl.push("ReformaDetalhesPage", {"id": ref.id});
   }
 
   async carregaReformas(){
     return await new Promise((resolve, reject) => {
-      let url = this.API_URL + "reformas";
+      let url = this.API_URL + "reformas/cliente" + this.idCliente;
 
       this.httpClient.get(url).subscribe(
         (result: any) => {

@@ -1,7 +1,8 @@
-import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
-import Utils from '../../shared/utils'
+import { Component, NgZone } from '@angular/core';
+import { ActionSheetController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+
+import Utils from '../../shared/utils';
 
 
 @IonicPage()
@@ -15,12 +16,14 @@ export class ReformaDetalhesPage {
   reforma:any;
   id:any;
   reformaLoading: boolean = true;
+  actionSheet: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public httpClient: HttpClient,
     public ngZone: NgZone,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public toastCtrl: ToastController
   ) {
     this.id = navParams.get("id");
   }
@@ -52,14 +55,14 @@ export class ReformaDetalhesPage {
   }
 
   public abrirModalProfissional(profissional: any){
-    const actionSheet = this.actionSheetCtrl.create({
+    this.actionSheet = this.actionSheetCtrl.create({
       title: profissional.nome,
       buttons: [
         {
           text: 'Aceitar profissional',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            this.reformaAndamento();
           }
         },{
           text: 'Abrir chat',
@@ -77,9 +80,27 @@ export class ReformaDetalhesPage {
         }
       ]
     });
-    actionSheet.present();
+    this.actionSheet.present();
   }
 
+  reformaAndamento() {
+
+    let url = this.API_URL +"reformas/status/";
+    this.httpClient.post(url,{reforma: this.id, status: 'andamento'}).subscribe(
+      data => {
+        this.toastCtrl
+          .create({
+            message: "Sua reforma está em Andamento!",
+            duration: 2000,
+            position: "bottom"
+          })
+          .present();
+          this.actionSheet.dismiss();
+
+      },
+      err => {}
+    );
+  }
   public getDate(data) {
     return Utils.getDate(data);
   }
