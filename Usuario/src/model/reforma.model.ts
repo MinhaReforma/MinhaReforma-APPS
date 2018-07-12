@@ -18,7 +18,7 @@ export class Reforma {
     this.id_cliente = cliente;
     this.nome = nome;
     this.descricao = descricao;
-    this.datainicio = (new Date()).toTimeString();
+    this.datainicio = new Date().toString();
 
   }
 }
