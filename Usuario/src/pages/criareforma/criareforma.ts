@@ -41,7 +41,6 @@ export class CriaReformaPage {
         "",
         Validators.compose([Validators.required, Validators.minLength(10)])
       ]
-      //senha2: ['',  Validators.compose([Validators.required, Validators.minLength(4)])]
     });
   }
 
@@ -55,13 +54,10 @@ export class CriaReformaPage {
     }
     return new Promise((resolve, reject) => {
       let url = this.API_URL + "reformas";
-
       this.httpClient
-        .post(url, new Reforma(this.id, this.input.nome, this.input.descricao))
+        .post(url, new Reforma(this.id, this.formgroup.value.nome, this.formgroup.value.descricao))
         .subscribe(
           (result: any) => {
-            console.log(result);
-            console.log(result.sucesso);
             if (result.sucesso == true) {
               this.toastCtrl
                 .create({
