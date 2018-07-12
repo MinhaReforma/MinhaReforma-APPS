@@ -4,7 +4,7 @@ import { Status } from './enum/status.enum';
 export class Reforma {
   public id: number;
   public id_cliente: number;
-  public datainicio: string;
+  public datainicio: number;
   public nome: string;
   public descricao: string;
   public listaFotos: {}// criar model Fotos[];;
@@ -18,7 +18,7 @@ export class Reforma {
     this.id_cliente = cliente;
     this.nome = nome;
     this.descricao = descricao;
-    this.datainicio = new Date().toString();
+    this.datainicio = + new Date();
 
   }
 }
