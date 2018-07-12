@@ -51,9 +51,9 @@ export class ReformaDetalhesPage {
     });
   }
 
-  public abrirModalProfissional(title: string){
+  public abrirModalProfissional(profissional: any){
     const actionSheet = this.actionSheetCtrl.create({
-      title: title,
+      title: profissional.nome,
       buttons: [
         {
           text: 'Aceitar profissional',
@@ -64,12 +64,12 @@ export class ReformaDetalhesPage {
         },{
           text: 'Abrir chat',
           handler: () => {
-            console.log('Archive clicked');
+            this.navCtrl.push('PerfilProfissionalPage',{"idProfissional": profissional.id, "id":this.reforma.id})
           }
         },{
           text: 'Ver perfil',
           handler: () => {
-            console.log('Archive clicked');
+            this.navCtrl.push('PerfilProfissionalPage',{"profissional": profissional.id})
           }
         },{
           text: 'Voltar',
