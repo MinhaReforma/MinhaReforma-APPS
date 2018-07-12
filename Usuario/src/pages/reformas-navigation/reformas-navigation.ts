@@ -1,6 +1,7 @@
 import { Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import Utils from '../../shared/utils'
 
 @IonicPage()
 @Component({
@@ -52,6 +53,10 @@ export class ReformasNavigationPage {
         error => {}
       );
     });
+  }
+
+  public getDate(data) {
+    return Utils.getDate(data);
   }
 
 }
