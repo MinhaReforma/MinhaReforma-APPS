@@ -1,13 +1,8 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import Utils from '../../shared/utils'
 
-/**
- * Generated class for the ReformaDetalhesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -20,13 +15,17 @@ export class ReformaDetalhesPage {
   reforma:any;
   id:any;
   reformaLoading: boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public ngZone: NgZone) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public httpClient: HttpClient,
+    public ngZone: NgZone,
+    public actionSheetCtrl: ActionSheetController
+  ) {
     this.id = navParams.get("id");
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ReformaDetalhesPage');
-  }
+  ionViewDidLoad() {}
   ionViewWillLoad(){
     this.carregaReformaDetalhe();
   }
@@ -42,8 +41,6 @@ export class ReformaDetalhesPage {
               this.reforma = result;
               this.reformaLoading = false;
             });
-
-
           }
           //resolve(result.json());
         },
@@ -54,6 +51,37 @@ export class ReformaDetalhesPage {
     });
   }
 
+  public abrirModalProfissional(title: string){
+    const actionSheet = this.actionSheetCtrl.create({
+      title: title,
+      buttons: [
+        {
+          text: 'Aceitar profissional',
+          role: 'destructive',
+          handler: () => {
+            console.log('Destructive clicked');
+          }
+        },{
+          text: 'Abrir chat',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },{
+          text: 'Ver perfil',
+          handler: () => {
+            console.log('Archive clicked');
+          }
+        },{
+          text: 'Voltar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 
+  public getDate(data) {
+    return Utils.getDate(data);
+  }
 
 }

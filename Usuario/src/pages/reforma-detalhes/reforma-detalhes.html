@@ -12,10 +12,19 @@
   <div padding *ngIf="!reformaLoading">
     <h3>Detalhes</h3>
     <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> {{reforma.descricao}}</p>
-    <p><ion-icon name="person"></ion-icon> <b>Solicitante:</b> {{reforma.cliente.id}}</p>
-    <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{reforma.datainicio}}</p>
+    <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{getDate(reforma.datainicio)}}</p>
     <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status">NÃO INICIADA</span></p>
-    <!-- <button ion-button block color="primary">Aplicar a reforma</button> -->
+    <p><ion-icon name="person"></ion-icon> <b>Profissionais que aplicaram</b></p>
+    <ion-list>
+      <ion-item class="item-profissional" *ngFor="let profissional of reforma.listaProfissionais" >
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/me.jpg">
+        </ion-thumbnail>
+        <h2>profissional.nome</h2>
+        <div><span *ngFor="let hab of profissional.listaHabilidades" class="habilidade-label">hab.nome</span></div>
+        <button ion-button clear item-end (click)="abrirModalProfissional(profissional.nome)">Ver</button>
+      </ion-item>
+    </ion-list>
   </div>
 
 </ion-content>

@@ -8,4 +8,20 @@ page-reforma-detalhes {
     color:white;
     padding: 4px;
   }
+  .item-profissional {
+    ion-thumbnail {
+      min-width: 40px;
+      min-height: 40px;
+    }
+    img {
+      width: 40px;
+      height: auto;
+      border-radius: 100%;
+    }
+    span.habilidade-label {
+      padding: 0px 4px 6px;
+      background-color: color($colors, light, base);
+      color: color($colors, primary, base);
+    }
+  }
 }
