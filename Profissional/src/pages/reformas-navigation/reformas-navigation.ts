@@ -33,8 +33,10 @@ export class ReformasNavigationPage {
       this.httpClient.get(url).subscribe(
         (result: any) => {
           if(result.sucesso){
-            this.showNone = false;
-              this.reformas = result.reformas;
+            this.reformas = result.reformas;
+            if (this.reformas.length > 0) {
+              this.showNone = false;
+            }
           }
         },
         error => {}
