@@ -45,7 +45,7 @@ export class RegistroPage {
       cpf: [
         "",
         [
-          // this.validaCPF,
+          this.validaCPF,
           Validators.compose([Validators.required, Validators.pattern("[0-9]*")])
         ]
       ]
@@ -126,23 +126,34 @@ export class RegistroPage {
 
   validaCPF(control: FormControl):any {
     let cpf = control.value;
-    let soma = 0;
-    let resto;
-
-    if (cpf == '00000000000') return {"Por favor, informe um CPF válido": true};
-
-    for (let i = 1; i < 9; i++) soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
-    resto = (soma * 10) % 11;
-
-    if((resto == 10) || (resto == 11)) resto = 0;
-    if(resto != parseInt(cpf.substring(9, 10))) return {"Por favor, informe um CPF válido": true};
-
-    soma = 0;
-    for(let i = 1; i <= 10; i++) soma = soma + parseInt(cpf.substring(i-1, i))*(12-i);
-    resto = (soma * 10) % 11;
-
-    if((resto == 10) || (resto == 11)) resto = 0;
-    if(resto != parseInt(cpf.substring(10, 11))) return {"Por favor, informe um CPF válido": true};
-    return null;
+    let numeros, digitos, soma, i, resultado, digitos_iguais;
+    digitos_iguais = 1;
+    if (cpf.length < 11)
+      return {"Por favor, informe um CPF válido": true};
+    for (i = 0; i < cpf.length - 1; i++)
+      if (cpf.charAt(i) != cpf.charAt(i + 1)) {
+        digitos_iguais = 0;
+        break;
+      }
+    if (!digitos_iguais) {
+      numeros = cpf.substring(0,9);
+      digitos = cpf.substring(9);
+      soma = 0;
+      for (i = 10; i > 1; i--)
+        soma += numeros.charAt(10 - i) * i;
+      resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      if (resultado != digitos.charAt(0))
+        return {"Por favor, informe um CPF válido": true};
+      numeros = cpf.substring(0,10);
+      soma = 0;
+      for (i = 11; i > 1; i--)
+        soma += numeros.charAt(11 - i) * i;
+      resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+      if (resultado != digitos.charAt(1))
+        return {"Por favor, informe um CPF válido": true};
+      return null;
+    }
+    else
+      return {"Por favor, informe um CPF válido": true};
   }
 }
