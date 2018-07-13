@@ -7,6 +7,7 @@ import {
   ToastController
 } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
+import Utils from "../../shared/utils";
 
 /**
  * Generated class for the ReformaDetalhesPage page.
@@ -26,6 +27,7 @@ export class ReformaDetalhesPage {
   id: any;
   profissional: any;
   reformaLoading: boolean = true;
+  showButton: boolean = true;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,6 +63,11 @@ export class ReformaDetalhesPage {
               this.ngZone.run(() => {
                 console.log(result);
                 this.reforma = result;
+                for(let prof of result.listaProfissionais){
+                  if(this.profissional == prof.id){
+                    this.showButton = false;
+                  }
+                }
                 this.reformaLoading = false;
               });
             }
@@ -81,6 +88,7 @@ export class ReformaDetalhesPage {
     };
     this.httpClient.post(url, dados).subscribe(
       data => {
+        this.carregaReformaDetalhe()
         this.toastCtrl
           .create({
             message: "Solicitação enviada com sucesso!",
@@ -91,5 +99,13 @@ export class ReformaDetalhesPage {
       },
       error => {}
     );
+  }
+
+  public abriChat(){
+    this.navCtrl.push('ChatReformaPage',{"idProfissional": this.profissional, "id":this.id});
+  }
+
+  public getDate(data) {
+    return Utils.getDate(data);
   }
 }

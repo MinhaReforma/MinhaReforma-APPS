@@ -3,6 +3,7 @@ import { Component, NgZone } from '@angular/core';
 import { ActionSheetController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import Utils from '../../shared/utils';
+import { Status } from '../../model/enum/status.enum';
 
 
 @IonicPage()
@@ -88,7 +89,7 @@ export class ReformaDetalhesPage {
   reformaAndamento() {
 
     let url = this.API_URL +"reformas/status/";
-    this.httpClient.post(url,{reforma: this.id, status: 'andamento'}).subscribe(
+    this.httpClient.post(url,{reforma: this.id, status: Status.ANDAMENTO}).subscribe(
       data => {
         this.toastCtrl
           .create({
