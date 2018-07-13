@@ -63,7 +63,7 @@
 
             <ion-item>
               <ion-label stacked>CPF</ion-label>
-              <ion-input formControlName="cpf" type="tel" [class.invalid]="!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt)"></ion-input>
+              <ion-input formControlName="cpf" type="tel" onkeyup= "!slideOneForm.controls.cpf.valid && (slideOneForm.controls.cpf.dirty || submitAttempt)"></ion-input>
             </ion-item>
 
             <ion-item *ngIf="!slideOneForm.controls.cpf.valid  && ( slideOneForm.controls.cpf.dirty || submitAttempt)">

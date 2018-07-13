@@ -19,6 +19,7 @@ export class Reforma {
     this.nome = nome;
     this.descricao = descricao;
     this.datainicio = + new Date();
+    this.status = Status.NOVO;
 
   }
 }

@@ -38,8 +38,7 @@ export class LoginPage {
         tipoPessoa: 'cliente'
       };
       let url = this.API_URL + 'login';
-      this.httpClient.post(url, data).toPromise()
-      .then(
+      this.httpClient.post(url, data).subscribe(
         (result: any) => {
         this.storage.set('usuario',result.id_usuario);
         this.storage.set('pessoa',result.id_pessoa);

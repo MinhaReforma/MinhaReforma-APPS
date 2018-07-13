@@ -74,7 +74,7 @@ export class ReformaDetalhesPage {
   }
 
   async registrarInteresse() {
-    let url = this.API_URL + "reformas/profissionais";
+    let url = this.API_URL + "reformas/profissional";
     let dados = {
       id_reforma: this.reforma.id,
       id_profissional: this.profissional
