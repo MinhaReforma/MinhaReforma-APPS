@@ -15,7 +15,7 @@
         [class.left]=" msg.perfil == 'cliente' "
         [class.right]=" msg.perfil == 'profissional' ">
           <div class="msg-detail">
-            <div class="msg-info">Nigga<span>{{ msg.data}}</span></div>
+            <div class="msg-info"><span>{{getTime(msg.data)}}</span></div>
             <div class="msg-content">
               <span class="triangle"></span>
               <p class="line-breaker ">{{msg.mensagem}}</p>

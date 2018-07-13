@@ -3,6 +3,9 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
+import Utils from '../../shared/utils';
+
+
 /**
  * Generated class for the ChatReformaPage page.
  *
@@ -40,7 +43,7 @@ export class ChatReformaPage {
   }
 
   ionViewDidLoad() {
-    setInterval(this.carregaChat(), 1000);
+    setInterval(() => this.carregaChat(), 1000);
   }
 
   async carregaChat() {
@@ -78,5 +81,8 @@ export class ChatReformaPage {
           }).present();
         }
       );
+  }
+  public getTime(t) {
+    return Utils.getTime(t);
   }
 }

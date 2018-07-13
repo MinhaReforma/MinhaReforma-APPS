@@ -10,10 +10,11 @@
 <ion-content padding>
   <div class="message-wrap">
 
-    <div *ngFor="let msg of conversa.mensagens" class="message" [class.left]=" msg.perfil === 'profissional' " [class.right]=" msg.perfil == 'cliente' ">
+    <div *ngFor="let msg of conversa?.mensagens" class="message" [class.left]=" msg.perfil === 'profissional' " [class.right]=" msg.perfil == 'cliente' ">
+      <img class="user-img" src="assets/imgs/me.jpg">
       <div class="msg-detail">
-        <div class="msg-info">Nigga
-          <span>{{msg.time}}</span>
+        <div class="msg-info">
+          <span>{{getTime(msg.data)}}</span>
         </div>
         <div class="msg-content">
           <span class="triangle"></span>

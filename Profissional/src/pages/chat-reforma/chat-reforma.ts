@@ -8,6 +8,9 @@ import {
   ToastController
 } from "ionic-angular";
 
+import Utils from '../../shared/utils';
+
+
 /**
  * Generated class for the ChatReformaPage page.
  *
@@ -95,5 +98,8 @@ export class ChatReformaPage {
             .present();
         }
       );
+  }
+  public getTime(t) {
+    return Utils.getTime(t);
   }
 }

@@ -69,7 +69,7 @@ export class ReformaDetalhesPage {
         },{
           text: 'Abrir chat',
           handler: () => {
-            this.navCtrl.push('ChatReformaPage',{"idProfissional": profissional.id, "id":this.reforma.id})
+            this.navCtrl.push('ChatReformaPage',{"idProfissional": profissional.id, "id":this.id})
           }
         },{
           text: 'Ver perfil',
