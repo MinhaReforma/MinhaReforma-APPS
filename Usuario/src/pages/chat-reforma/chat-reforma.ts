@@ -77,7 +77,9 @@ export class ChatReformaPage {
         mensagem: this.mensagem
       })
       .subscribe(
-        data => {},
+        data => {
+          this.mensagem = "";
+        },
         err => {
           this.toastCtrl.create({
             message: err.message,

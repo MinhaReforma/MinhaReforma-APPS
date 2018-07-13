@@ -18,14 +18,14 @@ export class PerfilProfissionalPage {
 
   API_URL: string = "https://minhareforma.herokuapp.com/";
   profissional: Object;
-  id: NavParams;
+  id: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient:HttpClient, private ngZone:NgZone) {
     this.id = navParams.get("profissional");
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PerfilProfissionalPage');
+    this.carregaPerfilProfissional();
   }
 
   async carregaPerfilProfissional(){
