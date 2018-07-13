@@ -9,6 +9,9 @@
       <ion-segment-button value="minhas">
         Minhas
       </ion-segment-button>
+      <ion-segment-button value="negociacao">
+        Negociando
+      </ion-segment-button>
       <ion-segment-button value="execucao">
         Em execução
       </ion-segment-button>
@@ -34,6 +37,10 @@
         </ion-grid>
       </ion-card>
 
+    </div>
+
+    <div *ngSwitchCase="'negociacao'" id="development">
+      Você não negociou em nenhuma reforma <br><span>:(</span>
     </div>
 
     <div *ngSwitchCase="'execucao'" id="development">
