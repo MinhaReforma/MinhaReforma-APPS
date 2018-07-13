@@ -9,7 +9,7 @@ export default class Utils {
   }
 
   static getDate(data) {
-    return moment(data).format('dd/mm/YYYY');
+    return moment(data).format('DD/MM/YYYY');
   }
 }
 
