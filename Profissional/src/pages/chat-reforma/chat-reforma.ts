@@ -31,6 +31,7 @@ export class ChatReformaPage {
   conversa: any;
   mensagem: any;
   count: any;
+  timeoutId: number;
 
   constructor(
     public navCtrl: NavController,
@@ -46,10 +47,14 @@ export class ChatReformaPage {
     });
   }
 
-  ionViewDidLoad() {
-    setInterval(() => {
+  ionViewDidEnter() {
+    this.timeoutId = setInterval(() => {
       this.carregaChat();
     }, 1000);
+  }
+
+  ionViewWillLeave(){
+    clearTimeout(this.timeoutId);
   }
 
   retornaPagina() {

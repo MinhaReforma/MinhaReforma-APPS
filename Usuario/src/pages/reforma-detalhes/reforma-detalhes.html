@@ -13,8 +13,8 @@
     <h3>Detalhes</h3>
     <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> {{reforma.descricao}}</p>
     <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{getDate(reforma.datainicio)}}</p>
-    <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status">NÃO INICIADA</span></p>
-    <p><ion-icon name="person"></ion-icon> <b>Profissionais que aplicaram</b></p>
+    <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status"> {{ reforma.status }} </span></p>
+    <p><ion-icon name="person"></ion-icon> <b> {{ profissionaisTexto }}</b></p>
     <ion-list>
       <ion-item class="item-profissional" *ngFor="let profissional of reforma.listaProfissionais">
         <ion-thumbnail item-start>
@@ -28,3 +28,7 @@
   </div>
 
 </ion-content>
+
+<ion-footer>
+  <button ion-button full *ngIf="showButton"  (click)="reformaConcluida()"> Concluir Reforma </button>
+</ion-footer>

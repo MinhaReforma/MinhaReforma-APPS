@@ -30,6 +30,12 @@ export class ReformasNavigationPage {
     this.tiposReformas = 'minhas';
   }
 
+  ionViewWillEnter() {
+    setTimeout(() => {
+      this.carregaReformas();
+    }, 500);
+  }
+
   criarReforma(){
     let modal = this.modalCtrl.create('CriaReformaPage', {"id":this.id});
     modal.onDidDismiss(data => {
