@@ -1,3 +1,38 @@
 page-perfil-profissional {
+  ion-content {
+    background-color: color($colors, primary, base)!important;
+  }
 
+  img {
+    border: 2px solid color($colors, light, base);
+    border-radius: 100%;
+  }
+
+  .profile-data {
+    color: color($colors, light, base);
+  }
+
+  div.stars {
+    font-size: 1.5em;
+  }
+
+  .card {
+    padding: 12px 8px 4px;
+    h4 {
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0;
+      li {
+        display: inline-block;
+        padding: 4px 16px;
+        border-radius: 32px;
+        margin: 8px 4px;
+        background-color: #e6e9ec;
+      }
+    }
+  }
 }

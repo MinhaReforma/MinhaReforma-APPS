@@ -1,3 +1,18 @@
 page-perfil-cliente {
+  ion-content {
+    background-color: color($colors, primary, base)!important;
+  }
 
+  img {
+    border: 2px solid color($colors, light, base);
+    border-radius: 100%;
+  }
+
+  .profile-data {
+    color: color($colors, light, base);
+  }
+
+  div.stars {
+    font-size: 1.5em;
+  }
 }
