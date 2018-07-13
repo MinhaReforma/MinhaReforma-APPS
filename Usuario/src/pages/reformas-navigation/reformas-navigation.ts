@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 })
 export class ReformasNavigationPage {
   showNone: boolean = true;
+  showNoneExec: boolean = true;
   tiposReformas:string;
   id: number;
   reformas:any = [];
@@ -55,6 +56,9 @@ export class ReformasNavigationPage {
             this.reformasConcluida = result.reformas.filter((element) => {return element.status == Status.CONCLUIDO});
             if (this.reformasNovo.length > 0) {
               this.showNone = false;
+            }
+            if (this.reformaAndamento.length > 0) {
+              this.showNoneExec = false;
             }
           }
         },

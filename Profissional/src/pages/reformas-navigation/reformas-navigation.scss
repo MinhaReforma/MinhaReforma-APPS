@@ -1,7 +1,15 @@
 page-reformas-navigation {
   .toolbar-md.tabs {
-    min-height: 42px;
-    margin-top: 14px;
+    min-height: 43px;
+    .toolbar-background-md {
+      background-color: color($colors, primary, base);
+    }
+    .segment-md .segment-button {
+      color: color($colors, light, base);
+      &.segment-activated {
+        border-color: color($colors, light, base);
+      }
+    }
   }
   ion-content {
     background-color: color($colors, light, base)!important;
@@ -20,7 +28,8 @@ page-reformas-navigation {
     top: 44%;
     text-align: center;
     font-size: 1.5em;
-    ion-icon {
+    opacity: .6;
+    span {
       font-size: 2.5em;
     }
   }

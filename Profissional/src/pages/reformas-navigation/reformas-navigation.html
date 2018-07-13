@@ -21,7 +21,7 @@
   <div [ngSwitch]="tiposReformas">
     <div *ngSwitchCase="'minhas'">
       <div *ngIf="showNone == true" id="development">
-        Nenhuma reforma cadastrada<br><ion-icon>:(</ion-icon>
+        Nenhuma reforma disponível<br><span>:(</span>
       </div>
       <ion-card *ngFor="let ref of reformas" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
         <h1>{{ref.nome}}</h1>
@@ -37,7 +37,7 @@
     </div>
 
     <div *ngSwitchCase="'execucao'" id="development">
-      Em desenvolvimento<br><ion-icon name="code-working"></ion-icon>
+      Você não está realizando nenhuma reforma<br><span>:(</span>
     </div>
 
   </div>

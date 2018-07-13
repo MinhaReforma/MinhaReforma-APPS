@@ -4,7 +4,7 @@
     <ion-title>Minhas reformas</ion-title>
   </ion-navbar>
 
-  <ion-toolbar class="tabs" no-padding>
+  <ion-toolbar class="tabs" no-padding >
     <ion-segment [(ngModel)]="tiposReformas">
       <ion-segment-button value="minhas">
         Minhas
@@ -21,7 +21,7 @@
   <div [ngSwitch]="tiposReformas">
     <div *ngSwitchCase="'minhas'">
       <div *ngIf="showNone" id="development">
-        Nenhuma reforma cadastrada<br><ion-icon>:(</ion-icon>
+        Nenhuma reforma cadastrada<br><span>:(</span>
       </div>
       <ion-card *ngFor="let ref of reformasNovo" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
         <h1>{{ref.nome}}</h1>
@@ -35,7 +35,10 @@
       </ion-card>
     </div>
 
-    <div *ngSwitchCase="'execucao'" id="development">
+    <div *ngSwitchCase="'execucao'">
+      <div *ngIf="showNoneExec" id="development">
+        Nenhuma reforma em execução<br><span>:(</span>
+      </div>
       <ion-card *ngFor="let ref of reformaAndamento" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
         <h1>{{ref.nome}}</h1>
         <p>{{ref.descricao}}</p>
@@ -47,7 +50,6 @@
         </ion-grid>
       </ion-card>
     </div>
-
   </div>
 
 </ion-content>
