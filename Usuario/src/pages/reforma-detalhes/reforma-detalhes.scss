@@ -19,9 +19,22 @@ page-reforma-detalhes {
       border-radius: 100%;
     }
     span.habilidade-label {
-      padding: 0px 4px 6px;
-      background-color: color($colors, light, base);
+      padding: 1px 6px;
+      border-radius: 10px;
+      background-color: color($colors, primary, base);
+      color: color($colors, light, base);
+      font-size: 0.75em;
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+  }
+  .action-sheet-container {
+    button.primaria {
+      font-weight: 500;
       color: color($colors, primary, base);
+    }
+    button.dismiss {
+      opacity: .7;
     }
   }
 }

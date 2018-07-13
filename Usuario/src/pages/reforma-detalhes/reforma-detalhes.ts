@@ -60,6 +60,7 @@ export class ReformaDetalhesPage {
       buttons: [
         {
           text: 'Aceitar profissional',
+          cssClass: 'primaria',
           role: 'destructive',
           handler: () => {
             this.reformaAndamento();
@@ -67,7 +68,7 @@ export class ReformaDetalhesPage {
         },{
           text: 'Abrir chat',
           handler: () => {
-            this.navCtrl.push('PerfilProfissionalPage',{"idProfissional": profissional.id, "id":this.reforma.id})
+            this.navCtrl.push('ChatReformaPage',{"idProfissional": profissional.id, "id":this.reforma.id})
           }
         },{
           text: 'Ver perfil',
@@ -76,6 +77,7 @@ export class ReformaDetalhesPage {
           }
         },{
           text: 'Voltar',
+          cssClass: 'dismiss',
           role: 'cancel'
         }
       ]

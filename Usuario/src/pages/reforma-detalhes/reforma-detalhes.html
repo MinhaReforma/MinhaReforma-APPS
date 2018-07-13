@@ -16,12 +16,12 @@
     <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status">NÃO INICIADA</span></p>
     <p><ion-icon name="person"></ion-icon> <b>Profissionais que aplicaram</b></p>
     <ion-list>
-      <ion-item class="item-profissional" *ngFor="let profissional of reforma.listaProfissionais" >
+      <ion-item class="item-profissional" *ngFor="let profissional of reforma.listaProfissionais">
         <ion-thumbnail item-start>
           <img src="assets/imgs/me.jpg">
         </ion-thumbnail>
-        <h2>profissional.nome</h2>
-        <div><span *ngFor="let hab of profissional.listaHabilidades" class="habilidade-label">hab.nome</span></div>
+        <h2>{{ profissional.nome }}</h2>
+        <div><p><span *ngFor="let hab of profissional.habilidades" class="habilidade-label">{{ hab }}</span></p></div>
         <button ion-button clear item-end (click)="abrirModalProfissional(profissional)">Ver</button>
       </ion-item>
     </ion-list>
