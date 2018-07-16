@@ -82,11 +82,13 @@ export class ChatReformaPage {
         id_conversa: this.conversa.id,
         perfil: "profissional",
         data: Date.now(),
-        mensagem: this.mensagem
+        mensagem: this.mensagem,
+        preco: this.preco
       })
       .subscribe(
         data => {
           this.mensagem = "";
+          this.removerPreco();
         },
         err => {
           this.toastCtrl

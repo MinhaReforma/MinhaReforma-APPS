@@ -69,8 +69,7 @@ export class ChatReformaPage {
         perfil: "cliente",
         data: Date.now(),
         mensagem: this.mensagem,
-        preco: this.preco,
-        negocia: true
+        preco: this.preco
       })
       .subscribe(
         data => {
