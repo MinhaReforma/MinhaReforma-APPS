@@ -49,7 +49,7 @@ export class RegistroPage {
       cpf: [
         "",
         [
-          // this.validaCPF,
+          this.validaCPF,
           Validators.compose([Validators.required, Validators.pattern("[0-9]*")])
         ]
       ]
