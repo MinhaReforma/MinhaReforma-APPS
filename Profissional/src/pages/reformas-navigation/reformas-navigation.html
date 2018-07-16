@@ -24,50 +24,71 @@
   <div [ngSwitch]="tiposReformas">
     <div *ngSwitchCase="'minhas'">
       <div *ngIf="showNoneNova" id="development">
-        Nenhuma reforma disponível<br><span>:(</span>
+        Nenhuma reforma disponível
+        <br>
+        <span>:(</span>
       </div>
       <ion-card *ngFor="let ref of reformaNova" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
         <h1>{{ref.nome}}</h1>
-        <p>{{ref.descricao}}</p>
+        <button ion-button color="dark" clear (click)="mostraOpcoes($event, ref.id)">
+          <ion-icon name="more"></ion-icon>
+        </button>
         <ion-grid>
           <ion-row>
-            <ion-col col-6><ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
-            <ion-col col-6>Profissionais: <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge></ion-col>
+            <ion-col col-6>
+              <ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
+            <ion-col col-6 class="align-right">
+              <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge> Profissionais</ion-col>
           </ion-row>
         </ion-grid>
+        <p>{{ref.descricao}}</p>
       </ion-card>
 
     </div>
 
-    <div *ngSwitchCase="'negociacao'" >
-        <div *ngIf="showNoneNegociacao" id="development">
-            Você não negociou em nenhuma reforma <br><span>:(</span>
-        </div>
+    <div *ngSwitchCase="'negociacao'">
+      <div *ngIf="showNoneNegociacao" id="development">
+        Você não negociou em nenhuma reforma
+        <br>
+        <span>:(</span>
+      </div>
       <ion-card *ngFor="let ref of reformaNegociacao" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
         <h1>{{ref.nome}}</h1>
-        <p>{{ref.descricao}}</p>
+        <button ion-button color="dark" clear (click)="mostraOpcoes($event, ref.id)">
+          <ion-icon name="more"></ion-icon>
+        </button>
         <ion-grid>
           <ion-row>
-            <ion-col col-6><ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
-            <ion-col col-6>Profissionais: <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge></ion-col>
+            <ion-col col-6>
+              <ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
+            <ion-col col-6 class="align-right">
+              <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge> Profissionais</ion-col>
           </ion-row>
         </ion-grid>
+        <p>{{ref.descricao}}</p>
       </ion-card>
     </div>
 
     <div *ngSwitchCase="'execucao'">
-        <div *ngIf="showNoneAndamento"  id="development">
-          Você não está realizando nenhuma reforma<br><span>:(</span>
-        </div>
+      <div *ngIf="showNoneAndamento" id="development">
+        Você não está realizando nenhuma reforma
+        <br>
+        <span>:(</span>
+      </div>
       <ion-card *ngFor="let ref of reformaAndamento" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
         <h1>{{ref.nome}}</h1>
-        <p>{{ref.descricao}}</p>
+        <button ion-button color="dark" clear (click)="mostraOpcoes($event, ref.id)">
+          <ion-icon name="more"></ion-icon>
+        </button>
         <ion-grid>
           <ion-row>
-            <ion-col col-6><ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
-            <ion-col col-6>Profissionais: <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge></ion-col>
+            <ion-col col-6>
+              <ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
+            <ion-col col-6 class="align-right">
+              <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge> Profissionais</ion-col>
           </ion-row>
         </ion-grid>
+        <p>{{ref.descricao}}</p>
       </ion-card>
     </div>
 

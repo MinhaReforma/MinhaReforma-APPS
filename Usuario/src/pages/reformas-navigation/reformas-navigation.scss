@@ -15,14 +15,26 @@ page-reformas-navigation {
     background-color: color($colors, light, base)!important;
   }
   .reforma-card {
-    padding: 0.8em;
+    padding: 1.4em 0.8em;
     background-color: white;
     border-radius: 4px;
-    p{
-      margin-bottom: 10px;
+    h1 {
+      width: 90%;
+    }
+    button[color="dark"] {
+      position: absolute;
+      top: 34px;
+      right: 24px;
+      font-size: 1.3em;
+    }
+    p {
+      color: #999999;
     }
     ion-grid {
-      margin: -10px;
+      margin: 6px -8px;
+      .align-right {
+        text-align: right;
+      }
     }
   }
   div#development {

@@ -6,7 +6,8 @@ import {
   IonicPage,
   ModalController,
   NavController,
-  NavParams
+  NavParams,
+  ActionSheetController
 } from "ionic-angular";
 import Utils from "../../shared/utils";
 
@@ -35,6 +36,7 @@ export class ReformasNavigationPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public httpClient: HttpClient,
+    public actionSheetCtrl: ActionSheetController,
     storage: Storage
   ) {
     storage.get("profissional").then(val => {
@@ -116,5 +118,30 @@ export class ReformasNavigationPage {
 
   public getDate(data) {
     return Utils.getDate(data);
+  }
+
+  public mostraOpcoes(e, id) {
+    e.stopPropagation();
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Opções',
+      buttons: [
+        {
+          text: 'Editar',
+          handler: () => {
+            console.log('editar');
+          }
+        },{
+          text: 'Excluir',
+          role: 'destructive',
+          handler: () => {
+            console.log('Excluir');
+          }
+        },{
+          text: 'Voltar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

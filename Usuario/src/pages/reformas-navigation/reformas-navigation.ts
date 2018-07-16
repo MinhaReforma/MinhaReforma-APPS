@@ -1,7 +1,7 @@
 import { Status } from './../../model/enum/status.enum';
 import { Component, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import Utils from '../../shared/utils'
 import { Storage } from '@ionic/storage';
 
@@ -22,7 +22,7 @@ export class ReformasNavigationPage {
   reformaAndamento: any = [];
   reformasConcluida: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public httpClient: HttpClient, private storage: Storage) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public httpClient: HttpClient, public actionSheetCtrl: ActionSheetController, private storage: Storage) {
     this.storage.get('cliente').then((val)=>{
       this.idCliente = val;
       this.carregaReformas();
@@ -77,6 +77,31 @@ export class ReformasNavigationPage {
 
   public getDate(data) {
     return Utils.getDate(data);
+  }
+
+  public mostraOpcoes(e, id) {
+    e.stopPropagation();
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Opções',
+      buttons: [
+        {
+          text: 'Editar',
+          handler: () => {
+            console.log('editar');
+          }
+        },{
+          text: 'Excluir',
+          role: 'destructive',
+          handler: () => {
+            console.log('Excluir');
+          }
+        },{
+          text: 'Voltar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }
