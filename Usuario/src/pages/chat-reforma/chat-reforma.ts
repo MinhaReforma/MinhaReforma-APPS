@@ -26,6 +26,7 @@ export class ChatReformaPage {
   conversa: any;
   mensagem: any;
   idProfissional: any;
+  timeoutId: number;
 
   constructor(
     public navCtrl: NavController,
@@ -43,7 +44,11 @@ export class ChatReformaPage {
   }
 
   ionViewDidLoad() {
-    setInterval(() => this.carregaChat(), 1000);
+    this.timeoutId = setInterval(()=>{this.carregaChat()}, 1000);
+  }
+
+  ionViewWillLeave(){
+    clearTimeout(this.timeoutId);
   }
 
   async carregaChat() {
@@ -72,7 +77,9 @@ export class ChatReformaPage {
         mensagem: this.mensagem
       })
       .subscribe(
-        data => {},
+        data => {
+          this.mensagem = "";
+        },
         err => {
           this.toastCtrl.create({
             message: err.message,

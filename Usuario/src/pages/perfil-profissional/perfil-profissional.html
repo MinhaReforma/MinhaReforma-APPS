@@ -1,16 +1,16 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>PerfilProfissional</ion-title>
+    <ion-title>Perfil do profissional</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-row>
     <ion-col col-4>
-        <img src="assets/imgs/me.jpg">
+        <img src="assets/imgs/heitor.jpg">
     </ion-col>
     <ion-col col-8 class="profile-data">
-        <h2>Gabriel Morais</h2>
+        <h2>{{ profissional?.nome }}</h2>
         <div class="stars">
           <ion-icon name="star-outline"></ion-icon>
           <ion-icon name="star-outline"></ion-icon>
@@ -18,17 +18,13 @@
           <ion-icon name="star-outline"></ion-icon>
           <ion-icon name="star-outline"></ion-icon>
         </div>
-        <p>Profissão</p>
+        <!-- <p>Profissão</p> -->
     </ion-col>
   </ion-row>
   <ion-card class="card">
     <h4>Habilidades</h4>
     <ul>
-      <li>hab1</li>
-      <li>hab2</li>
-      <li>hab3</li>
-      <li>hab4</li>
-      <li>hab5</li>
+      <li *ngFor="let hab of profissional?.habilidades" >{{ hab }}</li>
     </ul>
   </ion-card>
   <ion-card class="card">

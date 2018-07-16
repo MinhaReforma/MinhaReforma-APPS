@@ -73,7 +73,6 @@ export class ReformasNavigationPage {
               }
             }
             if (!flag) {
-              console.log("nova")
               this.reformaNova.push(ref);
             }
           }
