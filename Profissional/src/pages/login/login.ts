@@ -53,12 +53,15 @@ export class LoginPage {
         this.navCtrl.setRoot('MainBottomNavigationPage');
       },
       (error) => {
-        console.log(error);
         this.toastCtrl.create({
-          message: error.error.tipo,
+          message: error.error.tipo ? error.error.tipo : 'Ocorreu um erro ao validar o login. Tente novamente.',
           duration: 2000,
           position: 'bottom'
         }).present();
+      })
+      .catch(() => {
+        console.error('Errou');
+
       });
     });
 }

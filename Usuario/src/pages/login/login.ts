@@ -48,7 +48,7 @@ export class LoginPage {
       (error) => {
         console.log(error);
         this.toastCtrl.create({
-          message: error.error.mensagem,
+          message: error.error.mensagem ? error.error.mensagem : 'Ocorreu um erro ao validar o login. Tente novamente.' ,
           duration: 2000,
           position: 'bottom'
         }).present();
