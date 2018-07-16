@@ -5,18 +5,11 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  AlertController
 } from "ionic-angular";
 
 import Utils from '../../shared/utils';
-
-
-/**
- * Generated class for the ChatReformaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -32,6 +25,7 @@ export class ChatReformaPage {
   mensagem: any;
   count: any;
   timeoutId: number;
+  preco: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -39,7 +33,8 @@ export class ChatReformaPage {
     public httpClient: HttpClient,
     public storage: Storage,
     public ngZone: NgZone,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
   ) {
     this.idReforma = navParams.get("id");
     this.storage.get("profissional").then(val => {
@@ -47,7 +42,7 @@ export class ChatReformaPage {
     });
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     this.timeoutId = setInterval(() => {
       this.carregaChat();
     }, 1000);
@@ -106,5 +101,36 @@ export class ChatReformaPage {
   }
   public getTime(t) {
     return Utils.getTime(t);
+  }
+
+  public mostrarInformarPreco() {
+    const prompt = this.alertCtrl.create({
+      title: 'Negociar',
+      message: "Informe o preço que você gostaria de negociar com este profissional.",
+      inputs: [
+        {
+          name: 'preco',
+          placeholder: 'Preço',
+          type: 'number',
+          min: 1
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Inserir',
+          handler: data => {
+            this.preco = data.preco
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  public removerPreco() {
+    this.preco = 0;
   }
 }

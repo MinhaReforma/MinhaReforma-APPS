@@ -14,64 +14,32 @@
         class="message"
         [class.left]=" msg.perfil == 'cliente' "
         [class.right]=" msg.perfil == 'profissional' ">
-          <div class="msg-detail">
-            <div class="msg-info"><span>{{getTime(msg.data)}}</span></div>
+        <div class="msg-detail">
             <div class="msg-content">
               <span class="triangle"></span>
               <p class="line-breaker ">{{msg.mensagem}}</p>
+              <div class="msg-details">
+                <ion-badge color="light" *ngIf="msg.preco" >R$ {{ msg.preco }}</ion-badge>
+                <span class="timeChat">{{getTime(msg.data)}}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-    <!-- <div class="message left">
-      <img class="user-img" src="assets/imgs/me.jpg">
-      <div class="msg-detail">
-        <div class="msg-info">Nome
-          <span>18:20</span>
-        </div>
-        <div class="msg-content">
-          <span class="triangle"></span>
-          <p class="line-breaker">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer faucibus, est eu rhoncus consequat, justo urna
-            gravida elit, ac mattis tellus purus non magna.</p>
-        </div>
-      </div>
-    </div>
-    <div class="message right">
-      <img class="user-img" src="assets/imgs/me.jpg">
-      <div class="msg-detail">
-        <div class="msg-info">Nome
-          <span>18:20</span>
-        </div>
-        <div class="msg-content">
-          <span class="triangle"></span>
-          <p class="line-breaker">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-      </div>
-    </div>
-    <div class="message right">
-      <img class="user-img" src="assets/imgs/me.jpg">
-      <div class="msg-detail">
-        <div class="msg-info">Nome
-          <span>18:20</span>
-        </div>
-        <div class="msg-content">
-          <span class="triangle"></span>
-          <p class="line-breaker">OK</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
 </ion-content>
 
 <ion-footer no-border>
-  <div class="input-wrap">
-    <textarea [(ngModel)]="mensagem">
+    <button ion-button class="negociar" color="success" (click)="mostrarInformarPreco()" *ngIf="preco == 0"><ion-icon name="cash"></ion-icon></button>
+    <div class="preco" *ngIf="preco > 1">
+      <ion-badge color="success">R$ {{ preco }}<span (click)="removerPreco()">&times;</span></ion-badge>
+    </div>
+    <div class="input-wrap">
+      <textarea [(ngModel)]="mensagem">
       </textarea>
-    <button ion-button clear icon-only item-right (click)="enviaMensagem()">
-      <ion-icon name="send"></ion-icon>
-    </button>
-  </div>
-</ion-footer>
+      <button ion-button clear icon-only item-right (click)="enviaMensagem()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </div>
+    <span *ngIf="preco > 1" class="dolar">$</span>
+  </ion-footer>

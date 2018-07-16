@@ -1,17 +1,9 @@
 import { Storage } from '@ionic/storage';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
 import Utils from '../../shared/utils';
-
-
-/**
- * Generated class for the ChatReformaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -27,6 +19,7 @@ export class ChatReformaPage {
   mensagem: any;
   idProfissional: any;
   timeoutId: number;
+  preco: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -34,7 +27,8 @@ export class ChatReformaPage {
     public httpClient: HttpClient,
     public storage: Storage,
     public ngZone: NgZone,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
   ) {
     this.idProfissional = navParams.get("idProfissional");
     this.idReforma = navParams.get("id");
@@ -43,7 +37,7 @@ export class ChatReformaPage {
     });
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.timeoutId = setInterval(()=>{this.carregaChat()}, 1000);
   }
 
@@ -74,11 +68,14 @@ export class ChatReformaPage {
         id_conversa: this.conversa.id,
         perfil: "cliente",
         data: Date.now(),
-        mensagem: this.mensagem
+        mensagem: this.mensagem,
+        preco: this.preco,
+        negocia: true
       })
       .subscribe(
         data => {
           this.mensagem = "";
+          this.removerPreco();
         },
         err => {
           this.toastCtrl.create({
@@ -91,5 +88,36 @@ export class ChatReformaPage {
   }
   public getTime(t) {
     return Utils.getTime(t);
+  }
+
+  public mostrarInformarPreco() {
+    const prompt = this.alertCtrl.create({
+      title: 'Negociar',
+      message: "Informe o preço que você gostaria de negociar com este profissional.",
+      inputs: [
+        {
+          name: 'preco',
+          placeholder: 'Preço',
+          type: 'number',
+          min: 1
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Inserir',
+          handler: data => {
+            this.preco = data.preco
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  public removerPreco() {
+    this.preco = 0;
   }
 }
