@@ -20,7 +20,9 @@
               <span class="triangle"></span>
               <p class="line-breaker ">{{msg.mensagem}}</p>
               <div class="msg-details">
-                <ion-badge color="light" *ngIf="msg.preco" >R$ {{ msg.preco }}</ion-badge>
+                <ion-badge color="light" *ngIf="negociacao.msgId != msg.id" (click)="aceitarPreco(msg.id)">R$ {{msg.mensagem}}</ion-badge>
+                <ion-badge color="light" *ngIf="negociacao.msgId == msg.id && negociacao.nivelPreco == 1" (click)="aceitarPreco(msg.id)">R$ {{msg.mensagem}} <ion-icon name="checkmark"></ion-icon></ion-badge>
+                <ion-badge color="success" *ngIf="negociacao.nivelPreco == 2 && negociacao.msgId == msg.id">R$ {{msg.mensagem}} <ion-icon name="done-all"></ion-icon></ion-badge>
                 <span class="timeChat">{{getTime(msg.data)}}</span>
               </div>
             </div>

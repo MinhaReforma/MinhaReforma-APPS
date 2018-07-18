@@ -20,6 +20,10 @@ export class ChatReformaPage {
   idProfissional: any;
   timeoutId: number;
   preco: number = 0;
+  negociacao: any = {
+    nivelPreco: 0,
+    msgId: undefined
+  };
 
   constructor(
     public navCtrl: NavController,
@@ -69,7 +73,8 @@ export class ChatReformaPage {
         perfil: "cliente",
         data: Date.now(),
         mensagem: this.mensagem,
-        preco: this.preco
+        preco: this.preco,
+        nivelPreco: 0
       })
       .subscribe(
         data => {
@@ -118,5 +123,73 @@ export class ChatReformaPage {
 
   public removerPreco() {
     this.preco = 0;
+  }
+
+  public aceitarPreco(id) {
+    if (id == this.negociacao.msgId) {
+      this.mostrarDialogNegociacao(
+        'Iniciar negociação',
+        'Deseja negociar este preço como o final? Isto confirmará o orçamento em...',
+        () => {
+          this.negociaPreco(() => {
+            this.negociacao.nivelPreco++;
+          })
+        }
+      );
+    } else {
+      this.mostrarDialogNegociacao(
+        'Confirmar preço final',
+        'Deseja iniciar a negociação com este preço? O outro usuário poderá aceitar ou negociar um outro.',
+        () => {
+          this.negociaPreco(() => {
+            this.negociacao.msgId = id
+            this.negociacao.nivelPreco = 1
+          })
+        }
+      )
+    }
+
+  }
+
+  public mostrarDialogNegociacao(titulo:string, mensagem: string, callback: Function) {
+    const prompt = this.alertCtrl.create({
+      title: titulo,
+      message: mensagem,
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Confirmar',
+          handler: () => {
+            callback();
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+  private async negociaPreco(callback: Function) {
+    let url = this.API_URL + "conversas/mensagem";
+    this.httpClient
+      .put(url, {
+        id_mensagem: this.negociacao.msgId,
+        nivelPreco: this.negociacao.nivelPreco
+      })
+      .subscribe(
+        success => {
+          callback();
+        },
+        err => {
+          this.toastCtrl
+            .create({
+              message: err.message,
+              duration: 1500,
+              position: "bottom"
+            })
+            .present();
+        }
+      );
   }
 }

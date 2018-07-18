@@ -17,7 +17,9 @@
           <span class="triangle"></span>
           <p class="line-breaker ">{{msg.mensagem}}</p>
           <div class="msg-details">
-            <ion-badge color="light" *ngIf="msg.preco" >R$ {{ msg.preco }}</ion-badge>
+              <ion-badge color="light">R$ {{msg.mensagem}}</ion-badge>
+              <ion-badge color="light">R$ {{msg.mensagem}} <ion-icon name="checkmark"></ion-icon></ion-badge>
+              <ion-badge color="success">R$ {{msg.mensagem}} <ion-icon name="done-all"></ion-icon></ion-badge>
             <span class="timeChat">{{getTime(msg.data)}}</span>
           </div>
         </div>
