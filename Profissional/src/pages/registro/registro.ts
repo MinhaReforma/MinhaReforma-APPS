@@ -113,7 +113,7 @@ export class RegistroPage {
       return
     } else if (this.slideTwoForm.invalid){
       return;
-    } else if (this.profissao = "") {
+    } else if (this.profissao == "") {
       return;
     }
     var usuario = {"telefone": this.slideTwoForm.value.telefone, "senha": this.slideTwoForm.value.senha,
