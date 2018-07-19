@@ -18,6 +18,7 @@ export class RegistroPage {
   slideTwoForm: FormGroup;
   habilidade: string = "";
   habilidades: string[] = [];
+  profissao: string;
   isFirst: boolean = true;
   isLast: boolean = false;
 
@@ -112,10 +113,14 @@ export class RegistroPage {
       return
     } else if (this.slideTwoForm.invalid){
       return;
+    } else if (this.profissao = "") {
+      return;
     }
     var usuario = {"telefone": this.slideTwoForm.value.telefone, "senha": this.slideTwoForm.value.senha,
-     "cpf": this.slideOneForm.value.cpf, "nome": this.slideOneForm.value.firstName +" "+this.slideOneForm.value.lastName, "habilidades": this.habilidades };
-    return await new Promise((resolve, reject) => {
+     "cpf": this.slideOneForm.value.cpf, "nome": this.slideOneForm.value.firstName +" "+this.slideOneForm.value.lastName,
+     "habilidades": this.habilidades, "profissao": this.profissao};
+
+     return await new Promise((resolve, reject) => {
       let url = this.API_URL + "profissionais";
 
       this.httpClient.post(url, usuario).toPromise()

@@ -81,7 +81,19 @@
           <ion-card-title style="color:#000000;padding-top:10px; font-size: 24px; font-weight: bold;">
             Informações Profissionais
           </ion-card-title>
-
+          <ion-list>
+            <ion-item>
+              <ion-label>Sua profissão</ion-label>
+              <ion-select [(ngModel)]="profissao">
+                <ion-option value="">Selecione</ion-option>
+                <ion-option value="pedreiro">Pedreiro</ion-option>
+                <ion-option value="pintor">Pintor</ion-option>
+                <ion-option value="encanador">Encanador</ion-option>
+                <ion-option value="eletricista">Eletricista</ion-option>
+                <ion-option value="marceneiro">Marceneiro</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <div>
             <ion-item>
               <ion-label stacked>Habilidades</ion-label>
