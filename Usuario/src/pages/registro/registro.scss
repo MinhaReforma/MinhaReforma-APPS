@@ -40,4 +40,7 @@ page-registro {
   .invalid {
     border: 1px solid #ea6153;
   }
+  .swiper-pagination-progress .swiper-pagination-progressbar {
+    background: color($colors, secondary, base);
+  }
 }
