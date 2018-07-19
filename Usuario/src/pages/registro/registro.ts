@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { IonicPage, NavController, ToastController } from "ionic-angular";
-
+import Utils from '../../shared/utils';
 
 @IonicPage()
 @Component({
@@ -18,7 +18,7 @@ export class RegistroPage {
   isLast: boolean = false;
 
   submitAttempt: boolean = false;
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   constructor(
     public navCtrl: NavController,
     public formBuilder: FormBuilder,

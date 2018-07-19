@@ -17,7 +17,7 @@ import Utils from '../../shared/utils';
   templateUrl: "chat-reforma.html"
 })
 export class ChatReformaPage {
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   idReforma: any;
   profissional: any;
   id: any;

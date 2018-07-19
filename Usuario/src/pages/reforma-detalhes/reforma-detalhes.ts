@@ -13,7 +13,7 @@ import { Status } from '../../model/enum/status.enum';
 })
 export class ReformaDetalhesPage {
 
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   reforma:any;
   id:any;
   reformaLoading: boolean = true;

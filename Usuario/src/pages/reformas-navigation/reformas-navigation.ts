@@ -16,7 +16,7 @@ export class ReformasNavigationPage {
   tiposReformas:string;
   id: number;
   reformas:any = [];
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   idCliente: any;
   reformasNovo: any = [];
   reformaAndamento: any = [];

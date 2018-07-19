@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, ModalController }
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import Utils from '../../shared/utils';
 
 /**
  * Generated class for the LoginPage page.
@@ -17,7 +18,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   usuario = { telefone: "", senha: ""};
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';

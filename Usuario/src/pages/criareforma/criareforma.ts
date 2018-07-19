@@ -9,6 +9,7 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Storage } from "@ionic/storage";
+import Utils from '../../shared/utils';
 
 @IonicPage()
 @Component({
@@ -16,7 +17,7 @@ import { Storage } from "@ionic/storage";
   templateUrl: "criareforma.html"
 })
 export class CriaReformaPage {
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   input = { nome: "", descricao: "" };
   id: number;
   formgroup: FormGroup;
