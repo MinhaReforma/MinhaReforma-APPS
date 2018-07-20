@@ -15,7 +15,7 @@ import io from 'socket.io-client';
 
 import Utils from '../../shared/utils';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: "page-chat-reforma",
   templateUrl: "chat-reforma.html"

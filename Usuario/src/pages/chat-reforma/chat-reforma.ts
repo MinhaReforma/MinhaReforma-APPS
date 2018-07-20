@@ -58,8 +58,8 @@ export class ChatReformaPage {
       (data: any) => {
         this.ngZone.run(() => {
           this.conversa = data;
-          this.negociacao.msgId = data.msgNegociacao.id;
-          this.negociacao.nivelPreco = data.msgNegociacao.nivelPreco;
+          this.negociacao.msgId = data.msgNegociacao.id == undefined ? '' : data.msgNegociacao.id;
+          this.negociacao.nivelPreco = data.msgNegociacao.nivelPreco == undefined ? 0 : data.msgNegociacao.nivelPreco;
         });
       },
       err => {}
@@ -78,7 +78,7 @@ export class ChatReformaPage {
         data: Date.now(),
         mensagem: this.mensagem,
         preco: this.preco,
-        nivelPreco: 0
+        nivelPreco: this.preco > 0 ? 1 : 0
       })
       .subscribe(
         data => {
@@ -130,7 +130,7 @@ export class ChatReformaPage {
   }
 
   public aceitarPreco(id, perfil) {
-    if (perfil == 'cliente') {
+    if (perfil == 'profissional') {
 
       switch (this.negociacao.msgId) {
         case id:
