@@ -22,7 +22,7 @@ import Utils from "../../shared/utils";
   templateUrl: "reforma-detalhes.html"
 })
 export class ReformaDetalhesPage {
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   reforma: any;
   id: any;
   profissional: any;

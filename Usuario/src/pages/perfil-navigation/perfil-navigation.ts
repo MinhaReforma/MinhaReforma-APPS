@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import Utils from '../../shared/utils';
+
 /**
  * Generated class for the PerfilNavigationPage page.
  *
@@ -16,7 +18,7 @@ import { Storage } from '@ionic/storage';
 })
 export class PerfilNavigationPage {
 
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   perfil: any;
   id: any;
   perfilLoading: boolean = true;

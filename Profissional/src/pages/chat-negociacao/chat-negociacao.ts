@@ -2,6 +2,7 @@ import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import Utils from '../../shared/utils';
 
 /**
  * Generated class for the ChatNegociacaoPage page.
@@ -16,7 +17,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
   templateUrl: "chat-negociacao.html"
 })
 export class ChatNegociacaoPage {
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   idReforma: any;
   profissional: any;
   id: any;

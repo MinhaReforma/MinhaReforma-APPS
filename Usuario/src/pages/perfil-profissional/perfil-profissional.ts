@@ -1,6 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
+import Utils from '../../shared/utils';
 
 /**
  * Generated class for the PerfilProfissionalPage page.
@@ -16,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PerfilProfissionalPage {
 
-  API_URL: string = "https://minhareforma.herokuapp.com/";
+  API_URL: string = Utils.getApi();
   profissional: Object;
   id: any;
 
