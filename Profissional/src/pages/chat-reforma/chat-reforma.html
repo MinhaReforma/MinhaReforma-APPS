@@ -20,10 +20,10 @@
               <span class="triangle"></span>
               <p class="line-breaker ">{{msg.mensagem}}</p>
               <div class="msg-details">
-                <div *ngIf="msg.preco > 0" >
-                  <ion-badge color="light" *ngIf="negociacao.msgId != msg.id" (click)="aceitarPreco(msg.id)">R$ {{msg.preco}}</ion-badge>
-                  <ion-badge color="light" *ngIf="negociacao.msgId == msg.id && negociacao.nivelPreco == 1" (click)="aceitarPreco(msg.id)">R$ {{msg.preco}} <ion-icon name="checkmark"></ion-icon></ion-badge>
-                  <ion-badge color="success" *ngIf="negociacao.nivelPreco == 2 && negociacao.msgId == msg.id">R$ {{msg.preco}} <ion-icon name="done-all"></ion-icon></ion-badge>
+                <div *ngIf="msg.preco > 0">
+                  <ion-badge color="light" *ngIf="msg.nivelPreco == 0" (click)="aceitarPreco(msg.id, msg.perfil)">R$ {{msg.preco}}</ion-badge>
+                  <ion-badge color="light" *ngIf="msg.nivelPreco == 1" (click)="aceitarPreco(msg.id, msg.perfil)">R$ {{msg.preco}} <ion-icon name="checkmark"></ion-icon></ion-badge>
+                  <ion-badge color="success" *ngIf="msg.nivelPreco == 2">R$ {{msg.preco}} <ion-icon name="done-all"></ion-icon></ion-badge>
                 </div>
                 <span class="timeChat">{{getTime(msg.data)}}</span>
               </div>

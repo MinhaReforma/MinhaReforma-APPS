@@ -17,6 +17,7 @@ import Utils from '../../shared/utils';
   templateUrl: "chat-reforma.html"
 })
 export class ChatReformaPage {
+
   API_URL: string = Utils.getApi();
   idReforma: any;
   profissional: any;
@@ -30,6 +31,7 @@ export class ChatReformaPage {
     nivelPreco: 0,
     msgId: undefined
   };
+  perfilNegociador: string = 'cliente';
 
   constructor(
     public navCtrl: NavController,
@@ -70,6 +72,8 @@ export class ChatReformaPage {
             this.conversa = data;
             this.count = data.mensagens.length;
           }
+          this.negociacao.msgId = data.msgNegociacao.id;
+          this.negociacao.nivelPreco = data.msgNegociacao.nivelPreco;
         });
       },
       err => {}
@@ -141,28 +145,39 @@ export class ChatReformaPage {
     this.preco = 0;
   }
 
-  public aceitarPreco(id) {
-    if (id == this.negociacao.msgId) {
-      this.mostrarDialogNegociacao(
-        'Iniciar negociação',
-        'Deseja negociar este preço como o final? Isto confirmará o orçamento em...',
-        () => {
-          this.negociaPreco(() => {
-            this.negociacao.nivelPreco++;
-          })
-        }
-      );
-    } else {
-      this.mostrarDialogNegociacao(
-        'Confirmar preço final',
-        'Deseja iniciar a negociação com este preço? O outro usuário poderá aceitar ou negociar um outro.',
-        () => {
-          this.negociaPreco(() => {
-            this.negociacao.msgId = id
-            this.negociacao.nivelPreco = 1
-          })
-        }
-      )
+  public aceitarPreco(id, perfil) {
+    if (perfil == 'cliente') {
+
+      switch (this.negociacao.msgId) {
+        case id:
+          //se é uma confirmação de negociacao
+          this.mostrarDialogNegociacao(
+            'Confirmar preço final',
+            'Deseja negociar este preço como o final? Isto confirmará o orçamento final da reforma',
+            (/*success*/) => {
+              this.negociaPreco(id, 2,() => {
+                this.negociacao.nivelPreco++;//finalizou
+              })
+            }
+          );
+          break;
+
+        default:
+          if (this.negociacao.nivelPreco < 2) {
+            //se vai se iniciar a negociação
+            this.mostrarDialogNegociacao(
+              'Iniciar negociação',
+              'Deseja iniciar a negociação com este preço? O outro usuário poderá aceitar ou negociar um outro.',
+              (/*success*/) => {
+                this.negociaPreco(id, 1, () => {
+                  this.negociacao.msgId = id
+                  this.negociacao.nivelPreco = 1
+                })
+              }
+            )
+          }
+          break;
+      }
     }
 
   }
@@ -186,12 +201,12 @@ export class ChatReformaPage {
     prompt.present();
   }
 
-  private async negociaPreco(callback: Function) {
+  private async negociaPreco(id, lvl, callback: Function) {
     let url = this.API_URL + "conversas/mensagem";
     this.httpClient
       .put(url, {
-        id_mensagem: this.negociacao.msgId,
-        nivelPreco: this.negociacao.nivelPreco
+        id_mensagem: id,
+        nivelPreco: lvl
       })
       .subscribe(
         success => {
