@@ -8,8 +8,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { HttpClientModule } from '@angular/common/http';
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
-const config: SocketIoConfig = { url: 'https://minhareforma.herokuapp.com', options: {} };
+// import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+// const config: SocketIoConfig = { url: 'https://minhareforma.herokuapp.com', options: {} };
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ const config: SocketIoConfig = { url: 'https://minhareforma.herokuapp.com', opti
     HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    SocketIoModule.forRoot(config)
+    // SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
