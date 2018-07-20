@@ -68,10 +68,10 @@ export class ChatReformaPage {
     this.httpClient.get(url).subscribe(
       (data: any) => {
         this.ngZone.run(() => {
-          if (data.mensagens.length != this.count) {
+          // if (data.mensagens.length != this.count) {
             this.conversa = data;
             this.count = data.mensagens.length;
-          }
+          // }
           this.negociacao.msgId = data.msgNegociacao.id;
           this.negociacao.nivelPreco = data.msgNegociacao.nivelPreco;
         });
