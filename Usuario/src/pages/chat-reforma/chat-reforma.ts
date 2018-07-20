@@ -55,7 +55,7 @@ export class ChatReformaPage {
     let url =
       this.API_URL + "conversas/" + this.idReforma + "/" + this.idProfissional;
     this.httpClient.get(url).subscribe(
-      data => {
+      (data: any) => {
         this.ngZone.run(() => {
           this.conversa = data;
           this.negociacao.msgId = data.msgNegociacao.id;
