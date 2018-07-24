@@ -34,7 +34,7 @@
         <ion-item class="item-profissional" *ngFor="let profissional of reforma.listaProfissionais">
           <ion-thumbnail item-start>
             <img src="assets/imgs/user.png">
-            <span class="preco-reforma">R$ {{profissional.preco}},00</span>
+            <span class="preco-reforma" *ngIf="profissional.preco > 0">R$ {{profissional.preco}},00</span>
           </ion-thumbnail>
           <h2>{{ profissional.nome }}</h2>
           <p>{{ profissional.profissao }} <span class="habilidade-label">recomendado <ion-icon name="checkmark"></ion-icon></span></p>
