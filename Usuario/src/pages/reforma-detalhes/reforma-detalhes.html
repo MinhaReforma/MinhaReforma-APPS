@@ -9,22 +9,40 @@
 
 <ion-content>
   <img src="assets/imgs/reforma.png">
-  <div padding *ngIf="!reformaLoading">
-    <h3>Detalhes</h3>
-    <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> {{reforma.descricao}}</p>
-    <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{getDate(reforma.datainicio)}}</p>
-    <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status"> {{ reforma.status }} </span></p>
-    <p><ion-icon name="person"></ion-icon> <b> {{ profissionaisTexto }}</b></p>
-    <ion-list>
-      <ion-item class="item-profissional" *ngFor="let profissional of reforma.listaProfissionais">
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/user.png">
-        </ion-thumbnail>
-        <h2>{{ profissional.nome }}</h2>
-        <div><p><span *ngFor="let hab of profissional.habilidades" class="habilidade-label">{{ hab }}</span></p></div>
-        <button ion-button clear item-end (click)="abrirModalProfissional(profissional)">Ver</button>
-      </ion-item>
-    </ion-list>
+  <ion-toolbar class="tabs" no-padding >
+    <ion-segment [(ngModel)]="abaAtiva">
+      <ion-segment-button value="detalhes">
+        Detalhes
+      </ion-segment-button>
+      <ion-segment-button value="profissionais">
+        Profissionais
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <div padding *ngIf="!reformaLoading" [ngSwitch]="abaAtiva">
+    <div *ngSwitchCase="'detalhes'">
+      <!-- <h3>Detalhes</h3> -->
+      <p *ngIf="reforma.precoTotal > 0" >Preço total: R$ {{ reforma.precoTotal }},00</p>
+      <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{getDate(reforma.datainicio)}}</p>
+      <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status"> {{ reforma.status }} </span></p>
+      <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> {{reforma.descricao}}</p>
+    </div>
+    <div *ngSwitchCase="'profissionais'">
+      <p><b>{{ profissionaisTexto }}</b></p>
+      <ion-list>
+        <ion-item class="item-profissional" *ngFor="let profissional of reforma.listaProfissionais">
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/user.png">
+            <span class="preco-reforma">R$ {{profissional.preco}},00</span>
+          </ion-thumbnail>
+          <h2>{{ profissional.nome }}</h2>
+          <p>{{ profissional.profissao }} <span class="habilidade-label">recomendado <ion-icon name="checkmark"></ion-icon></span></p>
+          <!-- <div><p><span *ngFor="let hab of profissional.habilidades" class="habilidade-label">{{ hab }}</span></p></div> -->
+          <button ion-button clear item-end (click)="abrirModalProfissional(profissional)">Ver</button>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 
 </ion-content>

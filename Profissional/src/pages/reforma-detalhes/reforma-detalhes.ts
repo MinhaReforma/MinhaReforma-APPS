@@ -9,12 +9,6 @@ import {
 import { HttpClient } from "@angular/common/http";
 import Utils from "../../shared/utils";
 
-/**
- * Generated class for the ReformaDetalhesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -28,6 +22,8 @@ export class ReformaDetalhesPage {
   profissional: any;
   reformaLoading: boolean = true;
   showButton: boolean = true;
+  precoOrcamento: number;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -66,6 +62,7 @@ export class ReformaDetalhesPage {
                 for(let prof of result.listaProfissionais){
                   if(this.profissional == prof.id){
                     this.showButton = false;
+                    this.precoOrcamento = prof.preco;
                   }
                 }
                 this.reformaLoading = false;

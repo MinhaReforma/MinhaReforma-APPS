@@ -27,14 +27,20 @@ page-reforma-detalhes {
       text-transform: uppercase;
       margin-right: 4px;
     }
+    span.preco-reforma {
+      position: absolute;
+      bottom: 0;
+      left: 5%;
+      background: #ccc;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-weight: bold;
+      color: white;
+      font-size: 0.7em;
+    }
   }
-  .action-sheet-container {
-    button.primaria {
+  .action-sheet-md.primaria {
       font-weight: 500;
       color: color($colors, primary, base);
-    }
-    button.dismiss {
-      opacity: .7;
-    }
   }
 }

@@ -13,6 +13,7 @@ import { Status } from '../../model/enum/status.enum';
 })
 export class ReformaDetalhesPage {
 
+  abaAtiva: string;
   API_URL: string = Utils.getApi();
   reforma:any;
   id:any;
@@ -34,6 +35,7 @@ export class ReformaDetalhesPage {
 
   ionViewDidLoad() {}
   ionViewWillLoad(){
+    this.abaAtiva = 'detalhes';
     this.carregaReformaDetalhe();
   }
 

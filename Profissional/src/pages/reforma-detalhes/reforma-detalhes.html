@@ -9,12 +9,14 @@
 
 <ion-content>
   <img src="assets/imgs/reforma.png">
+  <button ion-fab *ngIf="!showButton" (click)="abriChat()" class="btn-chat"><ion-icon name="chatbubbles"></ion-icon></button>
   <div padding *ngIf="!reformaLoading">
     <h3>Detalhes</h3>
     <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> {{reforma.descricao}}</p>
     <p><ion-icon name="person"></ion-icon> <b>Solicitante:</b> {{reforma.cliente.nome}}</p>
     <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{ getDate(reforma.datainicio) }}</p>
     <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status"> {{ reforma.status }} </span></p>
+    <p *ngIf="precoOrcamento > 0" ><ion-icon name="cash"></ion-icon> <b>Orçamento:</b>R$ {{ precoOrcamento }},00</p>
     <!-- <button ion-button block color="primary">Aplicar a reforma</button> -->
   </div>
 
@@ -22,5 +24,4 @@
 
 <ion-footer>
   <button ion-button full *ngIf="showButton"  (click)="registrarInteresse()"> Demonstrar Interesse </button>
-  <button ion-button full *ngIf="!showButton"  (click)="abriChat()"> Chat </button>
 </ion-footer>
