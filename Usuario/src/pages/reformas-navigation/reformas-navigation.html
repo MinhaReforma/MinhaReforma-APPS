@@ -24,18 +24,24 @@
         Nenhuma reforma cadastrada<br><span>:(</span>
       </div>
       <ion-card *ngFor="let ref of reformasNovo" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
-          <h1>{{ref.nome}}</h1>
-          <button ion-button color="dark" clear (click)="mostraOpcoes($event, ref.id)">
-            <ion-icon name="more"></ion-icon>
-          </button>
-          <ion-grid>
-            <ion-row>
-              <ion-col col-6>
-                <ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
-              <ion-col col-6 class="align-right">
-                <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge> Profissionais</ion-col>
-            </ion-row>
-          </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-10>
+              <h1>{{ref.nome}}</h1>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button color="dark" clear (click)="mostraOpcoes($event, ref.id)">
+                <ion-icon name="more"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
+            <ion-col col-6 class="align-right">
+              <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge> Profissionais</ion-col>
+          </ion-row>
+        </ion-grid>
           <p>{{ref.descricao}}</p>
       </ion-card>
     </div>
@@ -45,19 +51,25 @@
         Nenhuma reforma em execução<br><span>:(</span>
       </div>
       <ion-card *ngFor="let ref of reformaAndamento" class="reforma-card" tappable (click)="abrirDetalhes(ref)">
-          <h1>{{ref.nome}}</h1>
-          <button ion-button color="dark" clear (click)="mostraOpcoes($event, ref.id)">
-            <ion-icon name="more"></ion-icon>
-          </button>
-          <ion-grid>
-            <ion-row>
-              <ion-col col-6>
-                <ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
-              <ion-col col-6 class="align-right">
-                <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge> Profissionais</ion-col>
-            </ion-row>
-          </ion-grid>
-          <p>{{ref.descricao}}</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-10>
+              <h1>{{ref.nome}}</h1>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button color="dark" clear (click)="mostraOpcoes($event, ref.id)">
+                <ion-icon name="more"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <ion-icon name="calendar"></ion-icon> {{ getDate(ref.datainicio) }}</ion-col>
+            <ion-col col-6 class="align-right">
+              <ion-badge item-end>{{ref.listaProfissionais.length}}</ion-badge> Profissionais</ion-col>
+          </ion-row>
+        </ion-grid>
+        <p>{{ref.descricao}}</p>
       </ion-card>
     </div>
   </div>
