@@ -3,6 +3,12 @@ page-reforma-detalhes {
     width: 100%;
     height:auto;
   }
+  .tabs {
+    margin-top: -4px;
+    &.toolbar-md {
+      min-height: 43px;
+    }
+  }
   span.status {
     background-color: color($colors, primary, base)!important;
     color:white;

@@ -19,7 +19,10 @@ export class ReformaDetalhesPage {
   id:any;
   reformaLoading: boolean = true;
   actionSheet: any;
-  profissionaisTexto: any;
+  textos: any = {
+    profissionaisHeader: '',
+    precoHeader: '',
+  }
   public showButton: boolean = false;
   constructor(
     public navCtrl: NavController,
@@ -30,7 +33,8 @@ export class ReformaDetalhesPage {
     public toastCtrl: ToastController
   ) {
     this.id = navParams.get("id");
-    this.profissionaisTexto = 'Profissionais que aplicaram';
+    this.textos.profissionalHeader = 'Profissionais que aplicaram';
+    this.textos.precoHeader = 'Orçamento inicial'
   }
 
   ionViewDidLoad() {}
@@ -50,7 +54,8 @@ export class ReformaDetalhesPage {
               this.reforma = result;
               if(result.status == Status.ANDAMENTO){
                 this.showButton = true;
-                this.profissionaisTexto = "Profissionais Contratados";
+                this.textos.profissionalHeader = "Profissionais Contratados";
+                this.textos.precoHeader = 'Preço final'
               }
               this.reformaLoading = false;
             });
@@ -90,7 +95,7 @@ export class ReformaDetalhesPage {
       }
     ];
 
-    if(this.reforma.status != Status.NOVO){
+    if(this.reforma.status != Status.NOVO || profissional.preco == 0){
       options = options.slice(1);
     }
     this.actionSheet = this.actionSheetCtrl.create({
