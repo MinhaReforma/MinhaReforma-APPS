@@ -53,6 +53,7 @@ export class ChatReformaPage {
 
   ionViewWillEnter() {
     this.scrollInicial = false;
+    this.mensagem = '';
     this.timeoutId = setInterval(() => {
       this.carregaChat();
     }, 1000);
