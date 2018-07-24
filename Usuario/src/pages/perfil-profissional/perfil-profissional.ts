@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import Utils from '../../shared/utils';
 
-/**
- * Generated class for the PerfilProfissionalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-perfil-profissional',
@@ -18,7 +11,7 @@ import Utils from '../../shared/utils';
 export class PerfilProfissionalPage {
 
   API_URL: string = Utils.getApi();
-  profissional: Object;
+  profissional: any;
   id: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient:HttpClient, private ngZone:NgZone) {
