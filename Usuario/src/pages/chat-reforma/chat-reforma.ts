@@ -1,5 +1,5 @@
 import { Storage } from '@ionic/storage';
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,6 +11,9 @@ import Utils from '../../shared/utils';
   templateUrl: 'chat-reforma.html',
 })
 export class ChatReformaPage {
+
+  @ViewChild('textArea') textArea: ElementRef;
+  @ViewChild('messages') divMsgs//: ElementRef;
 
   API_URL: string = Utils.getApi();
   idReforma: any;
@@ -26,6 +29,7 @@ export class ChatReformaPage {
     msgId: undefined
   };
   perfilNegociador: string = 'cliente';
+  private scrollInicial: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -44,6 +48,7 @@ export class ChatReformaPage {
   }
 
   ionViewWillEnter() {
+    this.scrollInicial = false;
     this.timeoutId = setInterval(()=>{this.carregaChat()}, 1000);
   }
 
@@ -60,6 +65,11 @@ export class ChatReformaPage {
           this.conversa = data;
           this.negociacao.msgId = data.msgNegociacao.id == undefined ? '' : data.msgNegociacao.id;
           this.negociacao.nivelPreco = data.msgNegociacao.nivelPreco == undefined ? 0 : data.msgNegociacao.nivelPreco;
+
+          if (!this.scrollInicial) {
+            this.scrollBottom();
+            this.scrollInicial = true;
+          }
         });
       },
       err => {}
@@ -84,6 +94,8 @@ export class ChatReformaPage {
         data => {
           this.mensagem = "";
           this.removerPreco();
+          this.resize();
+          this.scrollBottom();
         },
         err => {
           this.toastCtrl.create({
@@ -99,6 +111,8 @@ export class ChatReformaPage {
   }
 
   public mostrarInformarPreco() {
+    let t = this.mensagem.length > 0 ? ' e enviar' : '';
+
     const prompt = this.alertCtrl.create({
       title: 'Negociar',
       message: "Informe o preço que você gostaria de negociar com este profissional.",
@@ -115,9 +129,14 @@ export class ChatReformaPage {
           text: 'Cancelar'
         },
         {
-          text: 'Inserir',
+          text: 'Inserir'+ t,
           handler: data => {
             this.preco = data.preco
+            if (this.mensagem.length > 0) {
+              setTimeout(() => {
+                this.enviaMensagem();
+              }, 500);
+            }
           }
         }
       ]
@@ -206,5 +225,24 @@ export class ChatReformaPage {
             .present();
         }
       );
+  }
+
+  resize() {
+    let n = '34px';
+    this.textArea.nativeElement.style.height = n;
+    this.textArea.nativeElement.style.marginBottom = '0px'
+    if (this.mensagem.length > 0) {
+       n = this.textArea.nativeElement.scrollHeight + 'px';
+       if (n != '34px') {
+         this.textArea.nativeElement.style.marginBottom = '10px'
+       }
+    }
+    this.textArea.nativeElement.style.height = n;
+  }
+
+  private scrollBottom() {
+    setTimeout(() => {
+      this.divMsgs.scrollToBottom(300);
+    }, 500);
   }
 }

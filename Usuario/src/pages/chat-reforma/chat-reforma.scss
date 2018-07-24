@@ -3,13 +3,8 @@ page-chat-reforma {
   $userBackgroundColor: color($colors, primary, base);
   $toUserBackgroundColor: #fff;
 
-  ion-content .scroll-content {
+  ion-content .scroll-content, ion-footer {
     background-color: #f5f5f5;
-  }
-
-  ion-footer {
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.11);
-    background-color: #fff;
   }
 
   .line-breaker {
@@ -17,13 +12,22 @@ page-chat-reforma {
   }
 
   .input-wrap {
-    padding: 5px;
+    padding: 8px;
     display: flex;
-    textarea {
+    div.chat-msg {
       flex: 1;
-      border: 0;
-      border-bottom: 1px $userBackgroundColor;
-      border-style: solid;
+      display: flex;
+      background-color: $toUserBackgroundColor;
+      border-radius: 2em;
+      box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.25);
+      textarea {
+        background: none;
+        flex: 1 1 auto;
+        border: 0;
+        margin: 10px 1em 0 0;
+        font-size: 1.6rem;
+        min-height: 2em;
+      }
     }
   }
 
@@ -79,9 +83,13 @@ page-chat-reforma {
           }
           div.msg-details {
             margin-top: 1rem;
+            div {
+              margin-bottom: 6px;
+            }
             span.timeChat {
               opacity: 0.7;
               font-size: 0.8em;
+              float: right;
             }
           }
         }
@@ -141,15 +149,6 @@ page-chat-reforma {
 
   }
 
-  .negociar {
-    position: absolute;
-    top: -120%;
-    right: 3%;
-    border-radius: 100%;
-    height: 3.8em;
-    width: 3.8em;
-  }
-
   .preco {
     padding: 0.5em 0.5em 0;
     span {
@@ -158,8 +157,8 @@ page-chat-reforma {
   }
   span.dolar {
     position: absolute;
-    right: 5%;
-    bottom: 6%;
+    right: 20%;
+    bottom: 0%;
     font-weight: bold;
     font-size: 1.2em;
     color: color($colors, success, base)

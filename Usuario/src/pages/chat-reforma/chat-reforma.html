@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding #messages>
   <div class="message-wrap">
 
     <div *ngFor="let msg of conversa?.mensagens" class="message" [class.left]=" msg.perfil === 'profissional' " [class.right]=" msg.perfil == 'cliente' ">
@@ -32,16 +32,20 @@
 </ion-content>
 
 <ion-footer no-border>
-  <button ion-button class="negociar" color="success" (click)="mostrarInformarPreco()" *ngIf="preco == 0"><ion-icon name="cash"></ion-icon></button>
   <div class="preco" *ngIf="preco > 1">
     <ion-badge color="success">R$ {{ preco }}<span (click)="removerPreco()">&times;</span></ion-badge>
   </div>
   <div class="input-wrap">
-    <textarea [(ngModel)]="mensagem">
-    </textarea>
+    <div class="chat-msg">
+      <button ion-button clear icon-only color="success"
+        (click)="mostrarInformarPreco()" [disabled]="preco > 1 || negociacao.nivelPreco == 2">
+        <ion-icon name="cash"></ion-icon>
+      </button>
+      <textarea [(ngModel)]="mensagem" #textArea (input)="resize()" rows="1" min-height="40px" placeholder="Digite aqui"></textarea>
+    </div>
     <button ion-button clear icon-only item-right (click)="enviaMensagem()">
       <ion-icon name="send"></ion-icon>
+      <span *ngIf="preco > 1" class="dolar">$</span>
     </button>
   </div>
-  <span *ngIf="preco > 1" class="dolar">$</span>
 </ion-footer>
