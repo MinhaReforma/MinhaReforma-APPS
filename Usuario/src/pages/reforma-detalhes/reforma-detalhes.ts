@@ -23,7 +23,10 @@ export class ReformaDetalhesPage {
     profissionaisHeader: '',
     precoHeader: '',
   }
-  public showButton: boolean = false;
+  public exibirBotao: any = {
+    concluir: false,
+    andamento: false
+  }
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,8 +55,10 @@ export class ReformaDetalhesPage {
           if(result){
             this.ngZone.run(()=>{
               this.reforma = result;
-              if(result.status == Status.ANDAMENTO){
-                this.showButton = true;
+              if (result.status == Status.NOVO && result.listaProfissionaisAceitos.length > 0) {
+                this.exibirBotao.andamento = true;
+              } else if(result.status == Status.ANDAMENTO){
+                this.exibirBotao.concluir = true;
                 this.textos.profissionalHeader = "Profissionais Contratados";
                 this.textos.precoHeader = 'Preço final'
               }
@@ -76,7 +81,7 @@ export class ReformaDetalhesPage {
         cssClass: 'primaria',
         role: 'destructive',
         handler: () => {
-          this.reformaAndamento();
+          this.aceitaProfissional(profissional);
         }
       },{
         text: 'Abrir chat',
@@ -95,7 +100,8 @@ export class ReformaDetalhesPage {
       }
     ];
 
-    if(this.reforma.status != Status.NOVO || profissional.preco == 0){
+    if(this.reforma.status != Status.NOVO
+      || profissional.preco == 0 || this.reforma.listaProfissionaisAceitos.indexOf(profissional.id) >= 0){
       options = options.slice(1);
     }
     this.actionSheet = this.actionSheetCtrl.create({
@@ -105,10 +111,27 @@ export class ReformaDetalhesPage {
     this.actionSheet.present();
   }
 
+  aceitaProfissional(profissional) {
+    let url = this.API_URL + "reformas/profissional";
+    this.httpClient.put(url,{id_reforma: this.id, id_profissional: profissional.id, status: 'aceito'}).subscribe(
+      data => {
+        this.toastCtrl
+          .create({
+            message: profissional.nome + " participará desta reforma",
+            duration: 2000,
+            position: "bottom"
+          })
+          .present();
+
+      },
+      err => {}
+    );
+  }
+
   reformaAndamento() {
 
     let url = this.API_URL +"reformas/status";
-    this.httpClient.post(url,{reforma: this.id, status: Status.ANDAMENTO}).subscribe(
+    this.httpClient.put(url,{id_reforma: this.id, status: Status.ANDAMENTO}).subscribe(
       data => {
         this.toastCtrl
           .create({
