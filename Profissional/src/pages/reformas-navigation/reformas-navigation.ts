@@ -57,7 +57,7 @@ export class ReformasNavigationPage {
   }
 
   async carregaReformas() {
-    let url = this.API_URL + "reformas";
+    let url = this.API_URL + "reformas/novo";
     this.reformaNegociacao = [];
     this.reformaNova = [];
     this.httpClient.get(url).subscribe(
