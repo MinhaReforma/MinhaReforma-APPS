@@ -1,17 +1,8 @@
-<!--
-  Generated template for the PerfilNavigationPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar color="primary">
     <ion-title>Perfil</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content>
   <div *ngIf="!perfilLoading" class="profile-header">
@@ -20,13 +11,13 @@
     <div class="links">
       <ion-grid>
         <ion-row>
-          <ion-col col-6>
-            0
+          <ion-col col-6 (click)="mostrarReformasFinalizadas()">
+            {{ qtdeReformas }}
             <h6>Reformas finalizadas</h6>
           </ion-col>
           <ion-col col-6>
             0
-            <h6>Contratos</h6>
+            <h6>Avaliações</h6>
           </ion-col>
         </ion-row>
       </ion-grid>

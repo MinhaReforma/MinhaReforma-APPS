@@ -66,6 +66,9 @@ export class ReformasNavigationPage {
             if (this.reformaAndamento.length > 0) {
               this.showNoneExec = false;
             }
+
+            this.storage.set('quantidadeReformas', this.reformasConcluida.length);
+
           }
         },
         error => {

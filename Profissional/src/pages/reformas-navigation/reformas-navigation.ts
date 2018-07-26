@@ -37,9 +37,9 @@ export class ReformasNavigationPage {
     public modalCtrl: ModalController,
     public httpClient: HttpClient,
     public actionSheetCtrl: ActionSheetController,
-    storage: Storage
+    private storage: Storage
   ) {
-    storage.get("profissional").then(val => {
+    this.storage.get("profissional").then(val => {
       this.id = val;
       this.carregaReformasProfissional();
     });
@@ -110,6 +110,9 @@ export class ReformasNavigationPage {
           if (this.reformaConcluida.length > 0) {
             this.showNoneConcluido = false;
           }
+          console.log(this.reformaConcluida);
+
+          this.storage.set('quantidadeReformas', this.reformaConcluida.length);
         }
       },
       error => {}

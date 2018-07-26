@@ -1,15 +1,9 @@
+import { ReformasConcluidasPage } from './../reformas-concluidas/reformas-concluidas';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import Utils from '../../shared/utils';
-
-/**
- * Generated class for the PerfilNavigationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -22,10 +16,15 @@ export class PerfilNavigationPage {
   perfil: any;
   id: any;
   perfilLoading: boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient:HttpClient, private ngZone:NgZone, private storage: Storage) {
+  qtdeReformas: number = 0;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private httpClient:HttpClient, private ngZone:NgZone, private storage: Storage, public modalCtrl: ModalController) {
     storage.get('profissional').then((val)=>{
       this.id = val;
       this.carregarUsuario();
+    })
+    this.storage.get('quantidadeReformas').then(val => {
+      this.qtdeReformas = val;
     })
   }
 
@@ -51,5 +50,10 @@ export class PerfilNavigationPage {
         }
       );
     });
+  }
+
+  mostrarReformasFinalizadas() {
+    let modal = this.modalCtrl.create('ReformasConcluidasPage');
+    modal.present();
   }
 }

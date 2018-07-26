@@ -12,7 +12,10 @@ page-perfil-navigation {
     }
   }
   .links {
-    border-top: 1px solid rgba(255,255,255,0.3);
+    button {
+      white-space: normal;
+    }
+    // border-top: 1px solid rgba(255,255,255,0.3);
     ion-col + ion-col {
       border-left: 1px solid rgba(255,255,255,0.3);
     }
