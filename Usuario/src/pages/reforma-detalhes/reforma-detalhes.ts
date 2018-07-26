@@ -129,7 +129,6 @@ export class ReformaDetalhesPage {
   }
 
   reformaAndamento() {
-
     let url = this.API_URL +"reformas/status";
     this.httpClient.put(url,{id_reforma: this.id, status: Status.ANDAMENTO}).subscribe(
       data => {
@@ -140,6 +139,7 @@ export class ReformaDetalhesPage {
             position: "bottom"
           })
           .present();
+          this.exibirBotao.andamento = false;
 
       },
       err => {}
@@ -147,9 +147,8 @@ export class ReformaDetalhesPage {
   }
 
   reformaConcluida() {
-
     let url = this.API_URL +"reformas/status";
-    this.httpClient.post(url,{reforma: this.id, status: Status.CONCLUIDO}).subscribe(
+    this.httpClient.put(url,{id_reforma: this.id, status: Status.CONCLUIDO}).subscribe(
       data => {
         this.toastCtrl
           .create({
@@ -158,8 +157,7 @@ export class ReformaDetalhesPage {
             position: "bottom"
           })
           .present();
-          this.actionSheet.dismiss();
-
+          this.exibirBotao.concluir = false;
       },
       err => {}
     );
