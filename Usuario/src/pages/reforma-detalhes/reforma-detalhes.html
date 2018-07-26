@@ -37,7 +37,7 @@
             <span class="preco-reforma" *ngIf="profissional.preco > 0">R$ {{profissional.preco}},00</span>
           </ion-thumbnail>
           <h2>{{ profissional.nome }}
-            <ion-icon name="checkmark" *ngIf="reforma.listaProfissionaisAceitos.indexOf(profissional.id) >= 0" ></ion-icon>
+            <ion-icon name="checkmark" *ngIf="reforma.status != 'concluido' && reforma.listaProfissionaisAceitos.indexOf(profissional.id) >= 0" ></ion-icon>
           </h2>
           <p>{{ profissional.profissao }} <span class="habilidade-label">recomendado</span></p>
           <!-- <div><p><span *ngFor="let hab of profissional.habilidades" class="habilidade-label">{{ hab }}</span></p></div> -->

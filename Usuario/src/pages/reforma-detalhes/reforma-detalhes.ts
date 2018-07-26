@@ -61,6 +61,8 @@ export class ReformaDetalhesPage {
                 this.exibirBotao.concluir = true;
                 this.textos.profissionalHeader = "Profissionais Contratados";
                 this.textos.precoHeader = 'Preço final'
+              } else {
+                this.textos.precoHeader = 'Preço final'
               }
               this.reformaLoading = false;
             });
