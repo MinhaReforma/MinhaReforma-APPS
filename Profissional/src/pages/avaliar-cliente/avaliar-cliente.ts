@@ -15,8 +15,10 @@ export class AvaliarClientePage {
   idCliente: any;
   nota: number;
   mensagem: string;
+  reforma: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public httpClient: HttpClient, public storage: Storage, public toastCtrl: ToastController) {
+    this.reforma = this.navParams.get('reforma');
     this.storage.get("idClienteAvaliar").then(val => {
       this.idCliente = val;
     });
@@ -41,7 +43,7 @@ export class AvaliarClientePage {
     return new Promise((resolve, reject) => {
       let url = this.API_URL + "avaliacao";
       this.httpClient
-        .post(url, {id_avaliador: this.id, id_avaliado: this.idCliente, mensagem: this.mensagem, nota: this.nota, tipo:'profissional'})
+        .post(url, {id_avaliador: this.id, id_avaliado: this.idCliente, id_reforma: this.reforma , mensagem: this.mensagem, nota: this.nota, tipo:'profissional'})
         .subscribe(
           (result: any) => {
             if (result.sucesso == true) {

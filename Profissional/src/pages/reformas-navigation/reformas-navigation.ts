@@ -67,6 +67,7 @@ export class ReformasNavigationPage {
             let flag = false;
             if (ref.listaProfissionais.length > 0) {
               for (let prof of ref.listaProfissionais) {
+                console.log(prof)
                 if (this.id == prof.id) {
                   flag = true;
                   this.reformaNegociacao.push(ref);

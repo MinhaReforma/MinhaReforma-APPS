@@ -17,6 +17,7 @@ export class ReformaDetalhesPage {
   abaAtiva: string;
   API_URL: string = Utils.getApi();
   reforma:any;
+  public recomendacao:any;
   id:any;
   reformaLoading: boolean = true;
   actionSheet: any;
@@ -58,6 +59,8 @@ export class ReformaDetalhesPage {
           if(result){
             this.ngZone.run(()=>{
               this.reforma = result;
+              this.recomendacao = result.recomendacao.split(" ")
+
               if (result.status == Status.NOVO && result.listaProfissionaisAceitos.length > 0) {
                 this.exibirBotao.andamento = true;
               } else if(result.status == Status.ANDAMENTO){
@@ -170,7 +173,7 @@ export class ReformaDetalhesPage {
 
   avaliarProfissionais() {
     this.storage.set('profissionaisParaAvaliacao', this.reforma.listaProfissionais)
-    let modal = this.modalCtrl.create('AvaliacoesListaPage');
+    let modal = this.modalCtrl.create('AvaliacoesListaPage',{reforma: this.reforma.id});
     modal.present();
   }
 

@@ -103,13 +103,17 @@ export class ReformaDetalhesPage {
     this.navCtrl.push('ChatReformaPage',{"idProfissional": this.profissional, "id":this.id});
   }
 
+  capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   public getDate(data) {
     return Utils.getDate(data);
   }
 
   public avaliarSolicitante() {
     this.storage.set('idClienteAvaliar', this.reforma.cliente.id)
-    let modal = this.modalCtrl.create('AvaliarClientePage');
+    let modal = this.modalCtrl.create('AvaliarClientePage', {reforma: this.reforma.id});
     modal.present();
   }
 }

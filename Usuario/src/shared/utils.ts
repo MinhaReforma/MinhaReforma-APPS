@@ -15,5 +15,9 @@ export default class Utils {
   static getTime(tsp) {
     return moment(tsp).format('hh:MM')
   }
+
+  static capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 }
 
