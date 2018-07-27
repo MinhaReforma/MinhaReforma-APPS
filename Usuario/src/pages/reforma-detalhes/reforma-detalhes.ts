@@ -29,6 +29,8 @@ export class ReformaDetalhesPage {
     concluir: false,
     andamento: false
   }
+  todosAvaliados: boolean = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -69,6 +71,14 @@ export class ReformaDetalhesPage {
                 this.textos.precoHeader = 'Preço final'
               } else {
                 this.textos.precoHeader = 'Preço final'
+                for (let prof of result.listaProfissionais) {
+                  if (prof.avaliado == true) {
+                    this.todosAvaliados = true;
+                  } else {
+                    this.todosAvaliados = false;
+                    return;
+                  }
+                }
               }
               this.reformaLoading = false;
             });
@@ -172,7 +182,7 @@ export class ReformaDetalhesPage {
   }
 
   avaliarProfissionais() {
-    this.storage.set('profissionaisParaAvaliacao', this.reforma.listaProfissionais)
+    this.storage.set('profissionaisParaAvaliacao', this.reforma.listaProfissionais.filter((p) => {return p.avaliado == false}));
     let modal = this.modalCtrl.create('AvaliacoesListaPage',{reforma: this.reforma.id});
     modal.present();
   }
