@@ -49,7 +49,7 @@ export class AvaliarClientePage {
             if (result.sucesso == true) {
               this.toastCtrl
                 .create({
-                  message: result.mensagem,
+                  message: 'Você avaliou o cliente com sucesso',
                   duration: 1500,
                   position: "bottom"
                 })

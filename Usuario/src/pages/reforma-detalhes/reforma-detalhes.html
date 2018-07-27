@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title *ngIf="!reformaLoading">{{reforma.nome}}</ion-title>
+    <ion-title *ngIf="!reformaLoading">{{reforma?.nome}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -23,7 +23,7 @@
   <div padding *ngIf="!reformaLoading" [ngSwitch]="abaAtiva">
     <div *ngSwitchCase="'detalhes'">
       <!-- <h3>Detalhes</h3> -->
-      <p *ngIf="reforma.precoTotal > 0">{{ textos.precoHeader }}: R$ {{ reforma.precoTotal }},00</p>
+      <p *ngIf="reforma.precoTotal > 0"><ion-icon name="cash"></ion-icon> <b>{{ textos.precoHeader }}:</b> R$ {{ reforma.precoTotal }},00</p>
       <p><ion-icon name="calendar"></ion-icon> <b>Data de início:</b> {{getDate(reforma.datainicio)}}</p>
       <p><ion-icon name="hammer"></ion-icon> <b>Status:</b> <span class="status"> {{ reforma.status }} </span></p>
       <p><ion-icon name="list"></ion-icon> <b>Descrição:</b> {{reforma.descricao}}</p>

@@ -65,20 +65,24 @@ export class ReformaDetalhesPage {
 
               if (result.status == Status.NOVO && result.listaProfissionaisAceitos.length > 0) {
                 this.exibirBotao.andamento = true;
+
               } else if(result.status == Status.ANDAMENTO){
                 this.exibirBotao.concluir = true;
                 this.textos.profissionalHeader = "Profissionais Contratados";
                 this.textos.precoHeader = 'Preço final'
-              } else {
+
+              } else if (result.status == Status.CONCLUIDO) {
                 this.textos.precoHeader = 'Preço final'
-                for (let prof of result.listaProfissionais) {
-                  if (prof.avaliado == true) {
-                    this.todosAvaliados = true;
-                  } else {
-                    this.todosAvaliados = false;
-                    return;
+                setTimeout(() => {
+                  for (let prof of result.listaProfissionais) {
+                    if (prof.avaliado == true) {
+                      this.todosAvaliados = true;
+                    } else {
+                      this.todosAvaliados = false;
+                      return;
+                    }
                   }
-                }
+                }, 1000);
               }
               this.reformaLoading = false;
             });

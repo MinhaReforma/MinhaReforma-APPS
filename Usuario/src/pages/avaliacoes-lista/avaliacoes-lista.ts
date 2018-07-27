@@ -88,7 +88,7 @@ export class AvaliacoesListaPage {
             if (result.sucesso == true) {
               this.toastCtrl
                 .create({
-                  message: result.mensagem,
+                  message: 'Profissional avaliado com sucesso',
                   duration: 1500,
                   position: "bottom"
                 })
