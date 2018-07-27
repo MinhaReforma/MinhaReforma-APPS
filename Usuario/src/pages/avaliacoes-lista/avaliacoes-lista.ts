@@ -13,42 +13,49 @@ export class AvaliacoesListaPage {
   API_URL: string = Utils.getApi();
   id: any;
   div: any;
+  profissionais: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public httpClient: HttpClient, public toastCtrl: ToastController, public storage: Storage) {
     this.storage.get("cliente").then(val => {
       this.id = val;
     });
+    this.storage.get('profissionaisParaAvaliacao').then(val => {
+      this.profissionais = val;
+    })
   }
 
-  darNota(nota, e) {
-    this.div = e.target.parentElement;
-    const prompt = this.alertCtrl.create({
-      title: 'Escreva um comentário',
-      message: "Caso deseje, escreva um comentário contando um pouco o porquê dessa nota " + nota + " para o prestador",
-      inputs: [
-        {
-          name: 'mensagem',
-          placeholder: 'Digite um comentário (opcional)'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar'
-        },
-        {
-          text: 'Enviar',
-          handler: data => {
-            this.enviaAvaliacao(idProf, nota, data.mensagem);
+  darNota(nota, prof, event) {
+    if (event.target.style.color != 'rgb(227, 178, 60)') {
+      this.div = event.target.parentElement;
+
+      const prompt = this.alertCtrl.create({
+        title: 'Escreva um comentário',
+        message: "Caso deseje, escreva um comentário contando um pouco o porquê dessa nota " + nota + " para o prestador",
+        inputs: [
+          {
+            name: 'mensagem',
+            placeholder: 'Digite um comentário (opcional)'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Cancelar'
+          },
+          {
+            text: 'Enviar',
+            handler: data => {
+              this.enviaAvaliacao(prof.id, nota, data.mensagem);
+            }
           }
-        }
-      ]
-    });
-    prompt.present();
+        ]
+      });
+      prompt.present();
+    }
   }
 
   private enviaAvaliacao(idProf, nota, mensagem) {
     return new Promise((resolve, reject) => {
-      let url = this.API_URL + "/avaliacao";
+      let url = this.API_URL + "avaliacao";
       this.httpClient
         .post(url, {id_avaliador: this.id, id_avaliado: idProf, mensagem: mensagem, nota: nota, tipo:'cliente'})
         .subscribe(
@@ -75,6 +82,10 @@ export class AvaliacoesListaPage {
           }
         );
     });
+  }
+
+  closeModal() {
+    this.navCtrl.pop();
   }
 
 }

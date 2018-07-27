@@ -4,7 +4,7 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController, ModalController
 } from "ionic-angular";
 import { HttpClient } from "@angular/common/http";
 import Utils from "../../shared/utils";
@@ -29,8 +29,9 @@ export class ReformaDetalhesPage {
     public navParams: NavParams,
     public httpClient: HttpClient,
     public ngZone: NgZone,
-    storage: Storage,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    public storage: Storage
   ) {
     this.id = navParams.get("id");
     storage.get("profissional").then(val => {
@@ -104,5 +105,11 @@ export class ReformaDetalhesPage {
 
   public getDate(data) {
     return Utils.getDate(data);
+  }
+
+  public avaliarSolicitante() {
+    this.storage.set('idClienteAvaliar', this.reforma.cliente.id)
+    let modal = this.modalCtrl.create('AvaliarClientePage');
+    modal.present();
   }
 }

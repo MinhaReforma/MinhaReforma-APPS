@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Avaliar cliente</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only clear (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <h3>Avalie o cliente</h3>
+  <div class="nota">
+    <ion-icon name="star" *ngFor="let i of [1,2,3,4,5]" (click)="darEstrela($event, i)" id="{{i}}"></ion-icon>
+  </div>
+  <div class="mensagem">
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="mensagem" placeholder="Escreva sua avaliação (opcional)"></ion-input>
+    </ion-item>
+  </div>
+  <button ion-button block color="danger" (click)="enviaAvaliacao()">Enviar avaliação</button>
+</ion-content>

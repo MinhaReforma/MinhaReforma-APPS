@@ -1,21 +1,22 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Avaliações</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only clear (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+  <h4>Avalie os profissionais que trabalharam na sua reforma:</h4>
   <ion-list>
-    <ion-list-header>
-      Profissionais que trabalharam na reforma
-    </ion-list-header>
-    <!-- <ion-item *ngFor="let prof of profissionais" >
-      {{prof.nome}} -->
-    <ion-item>
-      Nome profissional
+    <ion-item *ngFor="let prof of profissionais" >
+      {{prof.nome}}
       <div class="nota">
-        <ion-icon name="star" *ngFor="let i of [1,2,3,4,5]" (click)="darNota(i, $event)" id="{{i}}"></ion-icon>
+        <ion-icon name="star" *ngFor="let i of [1,2,3,4,5]" (click)="darNota(i, prof, $event)"></ion-icon>
       </div>
     </ion-item>
   </ion-list>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, NgZone } from '@angular/core';
-import { ActionSheetController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 
 import Utils from '../../shared/utils';
 import { Status } from '../../model/enum/status.enum';
@@ -33,7 +34,9 @@ export class ReformaDetalhesPage {
     public httpClient: HttpClient,
     public ngZone: NgZone,
     public actionSheetCtrl: ActionSheetController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    public storage: Storage
   ) {
     this.id = navParams.get("id");
     this.textos.profissionalHeader = 'Profissionais que aplicaram';
@@ -163,6 +166,12 @@ export class ReformaDetalhesPage {
       },
       err => {}
     );
+  }
+
+  avaliarProfissionais() {
+    this.storage.set('profissionaisParaAvaliacao', this.reforma.listaProfissionais)
+    let modal = this.modalCtrl.create('AvaliacoesListaPage');
+    modal.present();
   }
 
 
