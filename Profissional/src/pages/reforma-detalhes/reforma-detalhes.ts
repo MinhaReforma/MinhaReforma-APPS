@@ -23,6 +23,7 @@ export class ReformaDetalhesPage {
   reformaLoading: boolean = true;
   showButton: boolean = true;
   precoOrcamento: number;
+  avaliado: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -34,6 +35,7 @@ export class ReformaDetalhesPage {
     public storage: Storage
   ) {
     this.id = navParams.get("id");
+    this.avaliado = navParams.get('avaliacao');
     storage.get("profissional").then(val => {
       this.profissional = val;
     });

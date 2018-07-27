@@ -52,7 +52,8 @@ export class ReformasConcluidasPage {
   }
 
   abrirDetalhes(ref){
-    this.navCtrl.push("ReformaDetalhesPage", {"id": ref.id});
+    console.log(ref);
+    this.navCtrl.push("ReformaDetalhesPage", {"id": ref.id, "avaliacao":ref.cliente.avaliado});
   }
 
 }
