@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Minhas avaliações</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only clear (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="minhaMedia">
+    Sua média é de:
+    <br><span>{{ minhaMedia/listaAvaliacoes?.length }}</span>
+  </div>
+  <ion-card *ngFor="let review of listaAvaliacoes">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/user.png">
+      </ion-avatar>
+      <h2>{{ review.profissional.nome }}</h2>
+      <p>
+        <ion-icon name="star" *ngFor="let i of [1,2,3,4,5]" [class.full]="review.nota >= i"></ion-icon>
+      </p>
+    </ion-item>
+    <ion-card-header>
+      {{ review.mensagem }}
+    </ion-card-header>
+  </ion-card>
+</ion-content>

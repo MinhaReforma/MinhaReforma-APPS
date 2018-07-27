@@ -1,4 +1,5 @@
 import { ReformasConcluidasPage } from './../reformas-concluidas/reformas-concluidas';
+import { ListarAvaliacoesPage } from './../listar-avaliacoes/listar-avaliacoes';
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { HttpClient } from '@angular/common/http';
@@ -54,6 +55,11 @@ export class PerfilNavigationPage {
 
   mostrarReformasFinalizadas() {
     let modal = this.modalCtrl.create('ReformasConcluidasPage');
+    modal.present();
+  }
+
+  mostrarAvaliacoes() {
+    let modal = this.modalCtrl.create('ListarAvaliacoesPage');
     modal.present();
   }
 }

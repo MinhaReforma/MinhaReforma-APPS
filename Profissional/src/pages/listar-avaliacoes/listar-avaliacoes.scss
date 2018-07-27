@@ -1,0 +1,23 @@
+page-listar-avaliacoes {
+  div.minhaMedia {
+    padding: 2em;
+    color: #fff;
+    span {
+      font-size: 3em;
+      font-weight: 700;
+    }
+    background-color: #E94F37;
+    text-align: center;
+    margin: -16px -16px -20px;
+  }
+  ion-icon {
+    color: #ddd;
+    font-size: 1.7em;
+    &.full {
+      color: #E3B23C;
+    }
+  }
+  ion-card-header {
+    padding-top: 0!important;
+  }
+}

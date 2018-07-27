@@ -56,6 +56,9 @@ export class PerfilNavigationPage {
     modal.present();
   }
 
-
+  mostrarAvaliacoes() {
+    let modal = this.modalCtrl.create('ListarAvaliacoesPage');
+    modal.present();
+  }
 
 }
